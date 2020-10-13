@@ -1,8 +1,5 @@
 package com.test.polymorphism.music3;
 import com.test.polymorphism.music.*;
-import com.test.polymorphism.shape.RandomShapeGenerator;
-
-import java.util.Random;
 
 class Instrument {
     void play(Note n) { System.out.println("Instrument.play() " + n); }
@@ -47,7 +44,7 @@ public class Music3 {
     // Doesn't care about type, so new types
 // added to the system still work right:
     public static void tune(Instrument i) {
-        i.play(Note.MIDDLE_C);
+        i.play(Note.B_FLAT);
     }
 
     public static void tuneAll(Instrument[] e) {
