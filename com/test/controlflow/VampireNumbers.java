@@ -15,8 +15,7 @@ public class VampireNumbers {
         if ((10 * b + c) * (10 * a + d) == n) return true;
         if ((10 * b + c) * (10 * d + a) == n) return true;
         if ((10 * c + a) * (10 * d + b) == n) return true;
-        if ((10 * c + a) * (10 * b + d) == n) return true;
-        return false;
+        return (10 * c + a) * (10 * b + d) == n;
     }
     public static void main(String [] args) {
         for (int i = 1000; i < 10000; i++) {

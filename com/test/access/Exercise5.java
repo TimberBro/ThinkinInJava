@@ -3,7 +3,7 @@ package com.test.access;
 public class Exercise5 {
     public int a = 1;
     protected int b = 2;
-    private int c = 3;
+    private final int c = 3;
     public void pub(){
         System.out.println("This is public method");
     }

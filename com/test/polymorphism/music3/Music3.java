@@ -40,7 +40,7 @@ class Woodwind extends Wind {
 }
 
 public class Music3 {
-    private static RandomIntrumentGenerator gen = new RandomIntrumentGenerator();
+    private static final RandomIntrumentGenerator gen = new RandomIntrumentGenerator();
     // Doesn't care about type, so new types
 // added to the system still work right:
     public static void tune(Instrument i) {

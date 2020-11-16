@@ -34,8 +34,10 @@ public class Rodent {
                 new Hamster(rodent),
                 new Hamster(rodent)};
         System.out.println("Array filled");
-        for (int i = 0; i < rodents.length; i++){
-            rodents[i].dispose();
+        for (Rodent value : rodents) {
+            value.dispose();
+            value.squeak();
+            value.type();
         }
     }
 }
@@ -59,7 +61,7 @@ class Gerbil extends Rodent{
 }
 
 class Hamster extends Rodent{
-    private Rodent rodent;
+    private final Rodent rodent;
     private static int counter = 0;
     private final int id = counter++;
     void type(){

@@ -7,7 +7,7 @@ import com.test.polymorphism.shape.Triangle;
 import java.util.Random;
 
 public class RandomIntrumentGenerator {
-    private Random rand = new Random();
+    private final Random rand = new Random();
     public Instrument next(){
         switch (rand.nextInt(6)){
             default:

@@ -2,7 +2,7 @@ package com.test.polymorphism.shape;
 
 
 public class Shapes {
-    private static RandomShapeGenerator gen = new RandomShapeGenerator();
+    private static final RandomShapeGenerator gen = new RandomShapeGenerator();
     public static void main(String[] args){
         Shape[] s = new Shape[9];
         for (int i = 0; i < s.length; i++){
