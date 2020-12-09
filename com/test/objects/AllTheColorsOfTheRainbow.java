@@ -1,7 +1,7 @@
 package com.test.objects;
 
 public class AllTheColorsOfTheRainbow {
-  int anlntegerRepresentingColors;
+  int anIntegerRepresentingColors;
 
   void changeTheHueOfTheColor(int newHue) {
   }

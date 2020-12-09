@@ -1,4 +1,7 @@
 package com.test.objects;
+/**
+ * <></>
+ */
 
 /** A class comment */
 public class Documentation1 {
