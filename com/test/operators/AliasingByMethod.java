@@ -2,7 +2,7 @@ package com.test.operators;
 
 import static com.test.util.Print.print;
 
-public class MethodFloatAliasing {
+public class AliasingByMethod {
 
   static void f(Tank x) {
     x.level = 45678.90f;

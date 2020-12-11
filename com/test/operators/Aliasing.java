@@ -3,7 +3,7 @@ package com.test.operators;
 
 import static com.test.util.Print.*;
 
-public class FloatAliasing {
+public class Aliasing {
 
   public static void main(String[] args) {
     Tank t1 = new Tank();
