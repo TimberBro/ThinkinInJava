@@ -22,8 +22,8 @@ public class Dog {
   public static void main(String[] args) {
     Dog spot = new Dog("spot", "Ruff!");
     Dog scruffy = new Dog("scruffy", "Wurf!");
-    print("Spot: name is " + spot.getName() + ", says " + spot.voice());
-    print("Scruffy: name is " + scruffy.getName() + ", says " + scruffy.voice());
+    print("Dog1: name is " + spot.getName() + ", says " + spot.voice());
+    print("Dog2: name is " + scruffy.getName() + ", says " + scruffy.voice());
     Dog zidan = new Dog("zidan", "Whoof!");
     print("Comparing before assigning");
     print(zidan == spot);
