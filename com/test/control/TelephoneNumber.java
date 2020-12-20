@@ -1,4 +1,4 @@
-package com.test.controlflow;
+package com.test.control;
 
 public class TelephoneNumber {
     public static String createPhoneNumber(int[] i){  // => returns "(123) 456-7890"

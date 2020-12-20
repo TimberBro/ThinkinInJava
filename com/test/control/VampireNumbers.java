@@ -1,4 +1,4 @@
-package com.test.controlflow;
+package com.test.control;
 
 public class VampireNumbers {
     public static boolean isVampireNumber(int n) {
