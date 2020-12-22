@@ -18,11 +18,11 @@ public class GreaterThanSecondGeneratedValue {
     System.out.println("Value of second generated item = " + storage[1]);
     for (int x : storage) {
         if (x > storage[1]) {
-        System.out.println("Value of " + x + " element greater than " + storage[1]);
+        System.out.println(x + " > " + storage[1]);
         } else if (x < storage[1]) {
-        System.out.println("Value of " + x + " element less than " + storage[1]);
+        System.out.println(x + " < " + storage[1]);
         } else {
-        System.out.println("Values are equal");
+        System.out.println(x + " = " + storage[1]);
         }
     }
   }
