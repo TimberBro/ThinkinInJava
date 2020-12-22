@@ -4,7 +4,7 @@ package com.test.control;
 public class IfElse {
   public static class Result {
     int match;
-    boolean inrange;
+    boolean inRange;
   }
 
   static Result test(int testval, int target, int begin, int end) {
@@ -12,31 +12,33 @@ public class IfElse {
     if (testval > target) {
       if (testval >= begin && testval <= end) {
         i.match = +1;
-        i.inrange = true;
+        i.inRange = true;
       } else {
         i.match = +1;
-        i.inrange = false;
+        i.inRange = false;
       }
     } else if (testval < target) {
       if (testval >= begin && testval <= end) {
         i.match = -1;
-        i.inrange = true;
+        i.inRange = true;
       } else {
         i.match = -1;
-        i.inrange = false;
+        i.inRange = false;
       }
     } else {
       i.match = 0; // Match
-      i.inrange = true;
+      i.inRange = true;
     }
     return i;
   }
 
   public static void main(String[] args) {
-    System.out.println(test(10, 5, 1, 11).match + " " + test(10, 5, 1, 11).inrange);
-    /*test(5, 10);
+    System.out.println(test(10, 5, 1, 11).match + " " + test(10, 5, 1, 11).inRange);
+    /*
+    test(5, 10);
     System.out.println(result);
     test(5, 5);
-    System.out.println(result); */
+    System.out.println(result);
+    */
   }
 }
