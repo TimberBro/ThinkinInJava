@@ -1,8 +1,8 @@
 package com.test.control;
 
 public class PrimeNumbers {
-  static int isPrime(int limit) {
-    for (int primeNominee = 2; primeNominee < limit; primeNominee++) {
+  static int printPrimeNumbers(int limit) {
+    for (int primeNominee = 1; primeNominee <= limit; primeNominee++) {
       int trigger = 0;
       for (int i = 2; i <= primeNominee / 2; i++) {
         if (primeNominee % i == 0) {
@@ -19,6 +19,6 @@ public class PrimeNumbers {
 
   public static void main(String[] args) {
     int x = 100;
-    PrimeNumbers.isPrime(x);
+    PrimeNumbers.printPrimeNumbers(x);
   }
 }

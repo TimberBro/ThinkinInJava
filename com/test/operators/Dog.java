@@ -28,10 +28,18 @@ public class Dog {
     print("Comparing before assigning");
     print(zidan == spot);
     print(zidan.equals(spot));
+    print(zidan == scruffy);
+    print(zidan.equals(scruffy));
+    print(scruffy == spot);
+    print(scruffy.equals(spot));
     print("Assign spot and zidan");
     zidan = spot;
     print(zidan == spot);
     print(zidan.equals(spot));
+    print(zidan == scruffy);
+    print(zidan.equals(scruffy));
+    print(scruffy == spot);
+    print(scruffy.equals(spot));
     print("Spot: name is " + spot.getName() + ", says " + spot.voice());
     print("Zidan: name is " + zidan.getName() + ", says " + zidan.voice());
   }

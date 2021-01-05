@@ -19,8 +19,8 @@ public class Velocity {
   }
 
   public static void main(String[] args) {
-    float x = 36f;
-    float y = 5f;
+    float x = 12;
+    float y = 3;
     print(calculateVelocity(x, y));
   }
 }

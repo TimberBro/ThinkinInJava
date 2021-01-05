@@ -1,16 +1,16 @@
 package com.test.control;
 
-public class Exercise7 {
+public class Break {
   public static void counter() {
     for (int i = 1; i <= 100; i++) {
       if (i == 100) {
-        break;
+        break; // or return will give same result
       }
       System.out.println(i);
     }
   }
 
   public static void main(String[] args) {
-    Exercise7.counter();
+    Break.counter();
   }
 }

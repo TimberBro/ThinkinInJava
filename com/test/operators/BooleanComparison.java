@@ -10,7 +10,7 @@ public class BooleanComparison {
   }
 
   public static void main(String[] args) {
-    String x = "HELLO!";
+    String x = "hello!";
     String y = "hello!";
     equals(x, y);
   }
