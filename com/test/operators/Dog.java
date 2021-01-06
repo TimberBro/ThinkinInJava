@@ -19,28 +19,23 @@ public class Dog {
     return says;
   }
 
+  static void compareDogs(Dog x, Dog y) {
+    System.out.println("Compare " + x.getName() + " and " + y.getName());
+    System.out.print(x.getName() + " == " + y.getName() + " is ");
+    System.out.println(x == y);
+    System.out.print(x.getName() + " equals " + y.getName() + " is ");
+    System.out.println(x.equals(y));
+    System.out.println();
+  }
+
   public static void main(String[] args) {
     Dog spot = new Dog("spot", "Ruff!");
     Dog scruffy = new Dog("scruffy", "Wurf!");
     print("Dog1: name is " + spot.getName() + ", says " + spot.voice());
     print("Dog2: name is " + scruffy.getName() + ", says " + scruffy.voice());
-    Dog zidan = new Dog("zidan", "Whoof!");
-    print("Comparing before assigning");
-    print(zidan == spot);
-    print(zidan.equals(spot));
-    print(zidan == scruffy);
-    print(zidan.equals(scruffy));
-    print(scruffy == spot);
-    print(scruffy.equals(spot));
-    print("Assign spot and zidan");
-    zidan = spot;
-    print(zidan == spot);
-    print(zidan.equals(spot));
-    print(zidan == scruffy);
-    print(zidan.equals(scruffy));
-    print(scruffy == spot);
-    print(scruffy.equals(spot));
-    print("Spot: name is " + spot.getName() + ", says " + spot.voice());
-    print("Zidan: name is " + zidan.getName() + ", says " + zidan.voice());
+    Dog zidan = spot;
+    compareDogs(spot, scruffy);
+    compareDogs(scruffy, zidan);
+    compareDogs(spot, zidan);
   }
 }
