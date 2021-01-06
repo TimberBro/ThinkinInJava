@@ -9,7 +9,7 @@ public class UnsignedRightShift {
     System.out.println("After left shift");
     System.out.println(Integer.toBinaryString(x));
     System.out.println("Start unsigned right shifting");
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 32; i++) {
       x >>>= 1;
       System.out.println(Integer.toBinaryString(x));
     }
