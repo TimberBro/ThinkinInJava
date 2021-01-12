@@ -3,10 +3,10 @@ package com.test.control;
 public class Break {
   public static void counter() {
     for (int i = 1; i <= 100; i++) {
-      if (i == 100) {
+      System.out.println(i);
+      if (i == 99) {
         break; // or return will give same result
       }
-      System.out.println(i);
     }
   }
 

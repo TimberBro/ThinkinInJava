@@ -1,14 +1,24 @@
 package com.test.control;
 
 public class BitwiseTest {
+  
+  static int numberOfZeros(int x) {
+    int count = 0;
+    while ((x & (1 << 31)) == 0) {
+      x = (x << 1);
+      count += 1;
+    }
+    return count;
+  }
+
   static void binaryPrint(int x) {
     if (x == 0) {
       System.out.print(0);
     } else {
-      int numberOfLeadingZeros = Integer.numberOfLeadingZeros(x);
+      int numberOfLeadingZeros = numberOfZeros(x);
       x <<= numberOfLeadingZeros;
       for (int p = 0; p < 32 - numberOfLeadingZeros; p++) {
-        int n = (Integer.numberOfLeadingZeros(x) == 0) ? 1 : 0;
+        int n = (numberOfZeros(x) == 0) ? 1 : 0;
         System.out.print(n);
         x <<= 1;
       }

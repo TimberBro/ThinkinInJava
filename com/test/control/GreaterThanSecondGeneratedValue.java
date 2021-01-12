@@ -13,18 +13,20 @@ public class GreaterThanSecondGeneratedValue {
   }
 
   public static void main(String[] args) {
-    Random random = new Random();
-    int[] storage = new int[25];
-    generateRandomIntValues(storage);
-    int secondGeneratedValue = random.nextInt();
-    System.out.println("Values will be classified with value = " + secondGeneratedValue);
-    for (int x : storage) {
-      if (x > secondGeneratedValue) {
-        System.out.println(x + " > " + secondGeneratedValue);
-      } else if (x < secondGeneratedValue) {
-        System.out.println(x + " < " + secondGeneratedValue);
-      } else {
-        System.out.println(x + " = " + secondGeneratedValue);
+    while (true) {
+      Random random = new Random();
+      int[] storage = new int[25];
+      generateRandomIntValues(storage);
+      int secondGeneratedValue = random.nextInt();
+      System.out.println("Values will be classified with value = " + secondGeneratedValue);
+      for (int x : storage) {
+        if (x > secondGeneratedValue) {
+          System.out.println(x + " > " + secondGeneratedValue);
+        } else if (x < secondGeneratedValue) {
+          System.out.println(x + " < " + secondGeneratedValue);
+        } else {
+          System.out.println(x + " = " + secondGeneratedValue);
+        }
       }
     }
   }
