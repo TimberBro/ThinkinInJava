@@ -1,27 +1,25 @@
 package com.test.control;
 
 public class BitwiseTest {
-  
-  static int numberOfZeros(int x) {
-    int count = 0;
-    while ((x & (1 << 31)) == 0) {
-      x = (x << 1);
-      count += 1;
+
+  static char[] getBinary(int x) {
+    char[] buffer = new char[32];
+    int position = 32;
+    for (int i = 31; i >= 0; i--) {
+      int mask = 0x80000000 >>> i;
+      buffer[--position] = (((mask & x) == mask ? '1' : '0'));
     }
-    return count;
+    return buffer;
   }
 
-  static void binaryPrint(int x) {
-    if (x == 0) {
-      System.out.print(0);
-    } else {
-      int numberOfLeadingZeros = numberOfZeros(x);
-      x <<= numberOfLeadingZeros;
-      for (int p = 0; p < 32 - numberOfLeadingZeros; p++) {
-        int n = (numberOfZeros(x) == 0) ? 1 : 0;
-        System.out.print(n);
-        x <<= 1;
-      }
+  static void toBinaryString(int x) {
+    char[] buffer = getBinary(x);
+    int i = 0;
+    while (buffer[i] != '1' & i < 31) {
+      i++;
+    }
+    for (int j = i; j < 32; j++) {
+      System.out.print(buffer[j]);
     }
     System.out.println();
   }
@@ -37,20 +35,21 @@ public class BitwiseTest {
     System.out.println("x ^ y = " + Integer.toBinaryString(x ^ y));
     System.out.println("~x = " + Integer.toBinaryString(~x));
     System.out.println("~y = " + Integer.toBinaryString(~y));
-    System.out.println("Using binaryPrint():");
+    System.out.println();
+    System.out.println("Using my toBinaryString():");
     System.out.print("i = ");
-    binaryPrint(x);
+    toBinaryString(x);
     System.out.print("j = ");
-    binaryPrint(y);
+    toBinaryString(y);
     System.out.print("x & y  = ");
-    binaryPrint(x & y);
+    toBinaryString(x & y);
     System.out.print("x | y  = ");
-    binaryPrint(x | y);
+    toBinaryString(x | y);
     System.out.print("x ^ y  = ");
-    binaryPrint(x ^ y);
+    toBinaryString(x ^ y);
     System.out.print("~x = ");
-    binaryPrint(~x);
+    toBinaryString(~x);
     System.out.print("~y = ");
-    binaryPrint(~y);
+    toBinaryString(~y);
   }
 }

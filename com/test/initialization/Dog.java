@@ -2,11 +2,11 @@ package com.test.initialization;
 
 public class Dog {
   public static void bark(char a, byte b) {
-    System.out.println("Da-da char");
+    System.out.println("Da-da char first");
   }
 
   public static void bark(byte a, char b) {
-    System.out.println("Da-da byte");
+    System.out.println("Da-da byte first");
   }
 
   public static void bark(short a) {
@@ -32,6 +32,7 @@ public class Dog {
   public static void main(String[] args) {
     char a = '5';
     byte b = 5;
+    Dog.bark(a, b);
     Dog.bark(b, a);
   }
 }

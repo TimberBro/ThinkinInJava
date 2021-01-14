@@ -1,6 +1,5 @@
 package com.test.control;
 
-
 public class IfElse {
   public static class Result {
     int match;
@@ -17,10 +16,8 @@ public class IfElse {
       i.match = +1;
       i.inRange = inRange(testval, begin, end);
     } else if (testval < target) {
-      if (testval >= begin && testval <= end) {
-        i.match = -1;
-        i.inRange = inRange(testval, begin, end);
-      }
+      i.match = -1;
+      i.inRange = inRange(testval, begin, end);
     } else {
       i.match = 0; // Match
       i.inRange = inRange(testval, begin, end);
@@ -29,7 +26,7 @@ public class IfElse {
   }
 
   public static void main(String[] args) {
-    System.out.println(test(10, 10, 5, 9).match + " " + test(10, 10, 5, 9).inRange);
+    System.out.println(test(4, 10, 5, 9).match + " " + test(4, 10, 5, 9).inRange);
     /*
     test(5, 10);
     System.out.println(result);
