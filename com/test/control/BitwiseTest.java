@@ -2,24 +2,18 @@ package com.test.control;
 
 public class BitwiseTest {
 
-  static char[] getBinary(int x) {
-    char[] buffer = new char[32];
-    int position = 32;
-    for (int i = 31; i >= 0; i--) {
+  static void printBinary(int x) {
+    boolean leadingZero = true;
+    for (int i = 0; i <= 31; i++) {
       int mask = 0x80000000 >>> i;
-      buffer[--position] = (((mask & x) == mask ? '1' : '0'));
-    }
-    return buffer;
-  }
-
-  static void toBinaryString(int x) {
-    char[] buffer = getBinary(x);
-    int i = 0;
-    while (buffer[i] != '1' & i < 31) {
-      i++;
-    }
-    for (int j = i; j < 32; j++) {
-      System.out.print(buffer[j]);
+      if (!leadingZero) {
+        System.out.print(((mask & x) == mask ? '1' : '0'));
+      } else if (((mask & x) == mask ? '1' : '0') == '1') {
+        System.out.print('1');
+        leadingZero = false;
+      } else if (i == 31) {
+        System.out.print(((mask & x) == mask ? '1' : '0'));
+      }
     }
     System.out.println();
   }
@@ -38,18 +32,18 @@ public class BitwiseTest {
     System.out.println();
     System.out.println("Using my toBinaryString():");
     System.out.print("i = ");
-    toBinaryString(x);
+    printBinary(x);
     System.out.print("j = ");
-    toBinaryString(y);
+    printBinary(y);
     System.out.print("x & y  = ");
-    toBinaryString(x & y);
+    printBinary(x & y);
     System.out.print("x | y  = ");
-    toBinaryString(x | y);
+    printBinary(x | y);
     System.out.print("x ^ y  = ");
-    toBinaryString(x ^ y);
+    printBinary(x ^ y);
     System.out.print("~x = ");
-    toBinaryString(~x);
+    printBinary(~x);
     System.out.print("~y = ");
-    toBinaryString(~y);
+    printBinary(~y);
   }
 }

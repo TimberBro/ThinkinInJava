@@ -1,15 +1,17 @@
 package com.test.initialization;
 
-public class ThisMethods {
+public class UsingThis {
   public void firstMethod() {
     secondMethod();
     this.secondMethod();
   }
 
-  public void secondMethod() {}
+  public void secondMethod() {
+    System.out.println("This is second method");
+  }
 
   public static void main(String[] args) {
-    ThisMethods x = new ThisMethods();
+    UsingThis x = new UsingThis();
     x.firstMethod();
   }
 }

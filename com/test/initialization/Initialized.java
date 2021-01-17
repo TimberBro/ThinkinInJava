@@ -1,7 +1,7 @@
 package com.test.initialization;
 
 public class Initialized {
-  String x;
+  String x = "why?";
   String y;
 
   Initialized() {
@@ -12,7 +12,5 @@ public class Initialized {
     Initialized test = new Initialized();
     System.out.println("x equal to " + test.x);
     System.out.println("y equal to " + test.y);
-    test.x = "why?";
-    System.out.println("x equal to " + test.x);
   }
 }

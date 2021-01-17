@@ -5,13 +5,12 @@ public class OverloadedConstructor {
 
   OverloadedConstructor() {
     this('w');
-    this.Symbol = 'S';
-    System.out.println("This is first constructor with void arguments." + Symbol);
+    System.out.println("This is constructor without arguments.");
   }
 
   OverloadedConstructor(char x) {
     Symbol = x;
-    System.out.println("This is second constructor with char argument. Char is " + Symbol);
+    System.out.println("This is constructor with char argument. Char is " + Symbol);
   }
 
   public static void main(String[] args) {

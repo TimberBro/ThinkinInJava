@@ -1,37 +1,38 @@
 package com.test.initialization;
 
 public class Tank {
-  int Capacity;
-  boolean Empty;
+  int capacity;
+  boolean empty;
 
   Tank(int x) {
     if (x > 0) {
-      Capacity = x;
-      Empty = false;
-    } else Empty = true;
+      capacity = x;
+      empty = false;
+    } else {
+      empty = true;
+    }
   }
 
   public void spillFuel() {
-    Capacity = 0;
-    Empty = true;
+    capacity = 0;
+    empty = true;
   }
 
   protected void finalize() {
-    if (!Empty) {
+    if (!empty) {
       System.out.println("WARNING! The tank is not empty!");
+    } else {
+      System.out.println("Empty tank");
     }
   }
 
   public static void main(String[] args) {
     Tank x = new Tank(25);
-    System.out.println("Current level of fuel is " + x.Capacity + ". Tank is empty - " + x.Empty);
-    System.gc();
+    System.out.println("Current level of fuel is " + x.capacity + ". Tank is empty - " + x.empty);
+    x.finalize();
     x.spillFuel();
+    System.out.println("Current level of fuel is " + x.capacity + ". Tank is empty - " + x.empty);
+    x = null;
     System.gc();
-    // System.out.println("Current level of fuel is " + x.Capacity + ". Tank is empty - " +
-    // x.Empty);
-    // Tank y = new Tank(1);
-    // System.out.println("Current level of fuel is " + y.Capacity + ". Tank is empty - " +
-    // y.Empty);
   }
 }

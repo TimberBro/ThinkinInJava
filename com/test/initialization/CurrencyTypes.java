@@ -1,6 +1,6 @@
 package com.test.initialization;
 
-public class Exercise21 {
+public class CurrencyTypes {
   public enum Currency {
     RUR,
     USD,
@@ -13,7 +13,7 @@ public class Exercise21 {
 
   public static void main(String[] args) {
     for (Currency x : Currency.values()) {
-      System.out.println("This is currency :" + x + ". And ordinal is :" + x.ordinal());
+      System.out.println("This is currency: " + x + ". And ordinal is: " + x.ordinal());
       switch (x) {
         case RUR:
           System.out.println("Russian ruble");
@@ -28,8 +28,14 @@ public class Exercise21 {
           System.out.println("Canadian dollar");
           break;
         case EUR:
+          System.out.println("Euro");
+          break;
         case TUR:
+          System.out.println("Turkish lira");
+          break;
         case USD:
+          System.out.println("US dollar");
+          break;
         default:
           System.out.println("Another currency");
           break;
