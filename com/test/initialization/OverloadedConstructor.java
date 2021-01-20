@@ -1,7 +1,7 @@
 package com.test.initialization;
 
 public class OverloadedConstructor {
-  char Symbol;
+  char symbol;
 
   OverloadedConstructor() {
     this('w');
@@ -9,8 +9,8 @@ public class OverloadedConstructor {
   }
 
   OverloadedConstructor(char x) {
-    Symbol = x;
-    System.out.println("This is constructor with char argument. Char is " + Symbol);
+    symbol = x;
+    System.out.println("This is constructor with char argument. Char is " + symbol);
   }
 
   public static void main(String[] args) {

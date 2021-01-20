@@ -2,42 +2,39 @@ package com.test.initialization;
 
 public class CurrencyTypes {
   public enum Currency {
-    RUR,
-    USD,
-    EUR,
-    TUR,
-    CAD,
-    AUS,
-    KR
+    FIVE,
+    TEN,
+    FIFTY,
+    HUNDRED,
+    TWO_HUNDREDS,
+    FIVE_HUNDREDS
   }
 
   public static void main(String[] args) {
-    for (Currency x : Currency.values()) {
-      System.out.println("This is currency: " + x + ". And ordinal is: " + x.ordinal());
-      switch (x) {
-        case RUR:
-          System.out.println("Russian ruble");
+    for (Currency currency : Currency.values()) {
+      System.out.println(
+          "This is paper currency: " + currency + " RUR. And ordinal is: " + currency.ordinal());
+      switch (currency) {
+        case FIVE:
+          System.out.println("Has a sight of Veliky Novgorod on it.");
           break;
-        case KR:
-          System.out.println("Swedish krona");
+        case TEN:
+          System.out.println("Has a sight of Krasnoyarsk on it.");
           break;
-        case AUS:
-          System.out.println("Australian dollar");
+        case FIFTY:
+          System.out.println("Has a sight of Saint Petersburg on it.");
           break;
-        case CAD:
-          System.out.println("Canadian dollar");
+        case HUNDRED:
+          System.out.println("Has a sight of Moscow on it.");
           break;
-        case EUR:
-          System.out.println("Euro");
+        case TWO_HUNDREDS:
+          System.out.println("Has a sight of Sevastopol on it.");
           break;
-        case TUR:
-          System.out.println("Turkish lira");
-          break;
-        case USD:
-          System.out.println("US dollar");
+        case FIVE_HUNDREDS:
+          System.out.println("Has a sight of Arkhangelsk on it.");
           break;
         default:
-          System.out.println("Another currency");
+          System.out.println("Has a sight of another city on it.");
           break;
       }
     }

@@ -1,14 +1,18 @@
 package com.test.initialization;
 
 public class Tank {
+  static int counter;
   int capacity;
+  int id = counter++;
   boolean empty;
 
   Tank(int x) {
     if (x > 0) {
       capacity = x;
       empty = false;
+      System.out.println("Filled tank with id = " + id + " was created. Current capacity = " + capacity + ".");
     } else {
+      System.out.println("Empty tank with id = " + id + " was created.");
       empty = true;
     }
   }
@@ -20,19 +24,16 @@ public class Tank {
 
   protected void finalize() {
     if (!empty) {
-      System.out.println("WARNING! The tank is not empty!");
+      System.out.println("WARNING! The tank " + id + " is not empty!");
     } else {
-      System.out.println("Empty tank");
+      System.out.println("Tank " + id + " is cleaned up");
     }
   }
 
   public static void main(String[] args) {
-    Tank x = new Tank(25);
-    System.out.println("Current level of fuel is " + x.capacity + ". Tank is empty - " + x.empty);
-    x.finalize();
-    x.spillFuel();
-    System.out.println("Current level of fuel is " + x.capacity + ". Tank is empty - " + x.empty);
-    x = null;
+    new Tank(0);
+    new Tank(15);
+    new Tank(25).spillFuel();
     System.gc();
   }
 }
