@@ -1,11 +1,11 @@
 package com.test.access;
 
-//import com.test.debug.Debug;
-import com.test.debugoff.Debug;
+import static com.test.access.debug.Debug.Debug;
+//import static com.test.access.debugoff.Debug.Debug;
 
 
 public class ConditionalCompilation {
     public static void main(String[] args){
-        Debug.Debug("Test");
+        Debug("Test");
     }
 }

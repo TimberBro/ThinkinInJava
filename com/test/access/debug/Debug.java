@@ -1,4 +1,4 @@
-package com.test.debug;
+package com.test.access.debug;
 
 public class Debug {
     public static void Debug(String x){
