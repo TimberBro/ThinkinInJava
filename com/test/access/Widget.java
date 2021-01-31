@@ -1,7 +1,7 @@
 package com.test.access;
 
 public class Widget {
-    public void Say(){
-        System.out.println("Test");
-    }
+  public Widget() {
+    System.out.println("Widget was created!");
+  }
 }
