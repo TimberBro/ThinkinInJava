@@ -1,22 +1,26 @@
 package com.test.reusing;
 
 class A {
-  A() {
-    System.out.println("This is A constructor ");
+  A(int i) {
+    System.out.println("This is A constructor " + i);
   }
 }
 
 class B {
-  B() {
-    System.out.println("This is B constructor ");
+  B(int i) {
+    System.out.println("This is B constructor " + i);
   }
 }
 
 public class C extends A {
 
-  B b = new B();
+
+  C(int i) {
+    super(i);
+    B b = new B(15);
+  }
 
   public static void main(String[] args) {
-    C c = new C();
+    C c = new C(2);
   }
 }
