@@ -12,13 +12,15 @@ class B {
   }
 }
 
-public class abc extends A {
-  abc(int i) {
+public class C extends A {
+
+  B b;
+
+  C(int i) {
     super(i);
-    B x = new B(15);
   }
-  // B x = new B();
+
   public static void main(String[] args) {
-    abc c = new abc(2);
+    C c = new C(2);
   }
 }
