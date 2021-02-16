@@ -1,9 +1,14 @@
 package com.test.reusing;
 
-public class Soap extends Detergent {
-  public void scrub() {
-    append(" Soap.scrub()");
+public class Soap {
+  // Add delegation to Soap class
+  private class MyDetergent extends Detergent {
+    public void scrub() {
+      append(" Soap.scrub()");
+    }
   }
+
+  private final MyDetergent detergent = new MyDetergent();
 
   public void sterillize() {
     append(" sterillize()");
@@ -20,6 +25,30 @@ public class Soap extends Detergent {
     System.out.println(x);
     System.out.println("Using Detergent class:");
     Detergent.main(args);
+  }
+
+  public void append(String a) {
+    detergent.append(a);
+  }
+
+  public void dilute() {
+    detergent.dilute();
+  }
+
+  public void apply() {
+    detergent.apply();
+  }
+
+  public void scrub() {
+    detergent.scrub();
+  }
+
+  public String toString() {
+    return detergent.toString();
+  }
+
+  public void foam() {
+    detergent.foam();
   }
 }
 
