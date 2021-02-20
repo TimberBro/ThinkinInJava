@@ -6,21 +6,6 @@ public class Frog extends Amphibian {
     super(color, numberOfLegs, length);
   }
 
-  @Override
-  public int getLength() {
-    return 100*super.getLength();
-  }
-
-  @Override
-  public int getNumberOfLegs() {
-    return  15 + super.getNumberOfLegs();
-  }
-
-  @Override
-  public String getColor() {
-    return "Frog color = " + super.getColor();
-  }
-
   public static void main(String[] args) {
     Frog frog = new Frog("Green", 4, 5);
     System.out.println(frog.getColor());
