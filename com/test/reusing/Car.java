@@ -7,7 +7,9 @@ class Engine {
 
   public void stop() {}
 
-  public void service() {}
+  public void service() {
+    System.out.println("Engine service launched.");
+  }
 }
 
 class Wheel {
@@ -31,10 +33,14 @@ class Door {
 public class Car {
   public Engine engine = new Engine();
   public Wheel[] wheel = new Wheel[4];
-  public Door left = new Door(), right = new Door(); // 2-door
+  public Door
+      left = new Door(),
+      right = new Door(); // 2-door
 
   public Car() {
-    for (int i = 0; i < 4; i++) wheel[i] = new Wheel();
+    for (int i = 0; i < 4; i++) {
+      wheel[i] = new Wheel();
+    }
   }
 
   public static void main(String[] args) {

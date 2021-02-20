@@ -14,6 +14,11 @@ public class Soap {
     append(" sterillize()");
   }
 
+  void dispose() {
+    System.out.println("Destroying soap.");
+    detergent.dispose();
+  }
+
   public static void main(String[] args) {
     System.out.println("Using Soap class:");
     Soap x = new Soap();
@@ -23,6 +28,7 @@ public class Soap {
     x.foam();
     x.sterillize();
     System.out.println(x);
+    x.dispose();
     System.out.println("Using Detergent class:");
     Detergent.main(args);
   }
@@ -71,6 +77,10 @@ class Cleanser {
     append(" scrub()");
   }
 
+  void dispose() {
+    System.out.println("Destroying cleanser.");
+  }
+
   public String toString() {
     return s;
   }
@@ -81,6 +91,7 @@ class Cleanser {
     x.apply();
     x.scrub();
     System.out.println(x);
+    x.dispose();
   }
 }
 
@@ -95,6 +106,11 @@ class Detergent extends Cleanser {
     append(" foam()");
   }
 
+  void dispose() {
+    System.out.println("Destroying detergent.");
+    super.dispose();
+  }
+
   // Test the new class:
   public static void main(String[] args) {
     Detergent x = new Detergent();
@@ -103,6 +119,7 @@ class Detergent extends Cleanser {
     x.scrub();
     x.foam();
     System.out.println(x);
+    x.dispose();
     System.out.println("Using base class:");
     Cleanser.main(args);
   }
