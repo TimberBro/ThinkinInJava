@@ -12,7 +12,7 @@ public class Frog extends Amphibian {
    */
   @Override
   public int getLength() {
-    return 100*super.getLength();
+    return 100 * super.getLength();
   }
 
   @Override

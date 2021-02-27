@@ -1,14 +1,11 @@
 package com.test.reusing;
 
 class Amphibian {
-
-  /***
-   * Color of the skin
+  /*** Color of the skin
    */
   private String color;
   private int numberOfLegs;
-  /***
-   * Length in cm
+  /*** Length in cm
    */
   private int length;
 

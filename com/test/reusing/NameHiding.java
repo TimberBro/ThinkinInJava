@@ -2,11 +2,13 @@ package com.test.reusing;
 
 public class NameHiding {
   void sound(int i) {
-      System.out.println("Bark");
+    System.out.println("Bark");
   }
+
   void sound(float f) {
     System.out.println("Squawk");
   }
+
   void sound(char c) {
     System.out.println("Meow");
   }
