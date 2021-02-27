@@ -2,9 +2,9 @@ package com.test.reusing;
 
 import com.test.reusing.device.Keyboard;
 
-public class CallKeyboardStatus extends Keyboard {
+public class Desktop extends Keyboard {
   public static void main(String[] args) {
-    CallKeyboardStatus k = new CallKeyboardStatus();
+    Desktop k = new Desktop();
     k.printStatus();
   }
 }
