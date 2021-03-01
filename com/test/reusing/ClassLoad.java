@@ -8,7 +8,8 @@ public class ClassLoad {
     System.out.println("Trying to access the static field");
     System.out.println("Static field value = " + Desk.counter);
     //Class loading by the creation of the first instance of that class
-    System.out.println("Trying to access the static field after creating an instance of the class.");
+    System.out.println("Trying to access the static "
+        + "field after creating an instance of the class.");
     Desk desk = new Desk();
     System.out.println("Static field value = " + Desk.counter);
   }

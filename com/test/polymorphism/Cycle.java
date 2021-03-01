@@ -1,4 +1,4 @@
-package com.test.reusing;
+package com.test.polymorphism;
 
 class Unicycle extends Cycle {
   Unicycle() {
@@ -6,7 +6,7 @@ class Unicycle extends Cycle {
   }
 
   public void balance() {
-    System.out.println("Balance!1");
+    System.out.println("Balance on 1 wheel.");
   }
 }
 
@@ -16,13 +16,17 @@ class Bicycle extends Cycle {
   }
 
   public void balance() {
-    System.out.println("Balance!2");
+    System.out.println("Balance on 2 wheels.");
   }
 }
 
 class Tricycle extends Cycle {
   Tricycle() {
     NumberOfWheels = 3;
+  }
+
+  public void balance() {
+    System.out.println("Balance on 3 wheels.");
   }
 }
 
