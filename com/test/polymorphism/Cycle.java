@@ -21,6 +21,11 @@ class Tricycle extends Cycle {
 public class Cycle {
   public void ride() {
     System.out.println("This is cycle");
+    System.out.println("Number of wheels = " + wheels());
+  }
+
+  public int wheels() {
+    return numberOfWheels;
   }
 
   protected int numberOfWheels = 0;
