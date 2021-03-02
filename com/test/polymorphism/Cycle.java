@@ -10,6 +10,10 @@ class Bicycle extends Cycle {
   Bicycle() {
     numberOfWheels = 2;
   }
+
+  public void balance() {
+    System.out.println("Balance!2");
+  }
 }
 
 class Tricycle extends Cycle {
