@@ -2,19 +2,19 @@ package com.test.polymorphism;
 
 class Unicycle extends Cycle {
   Unicycle() {
-    NumberOfWheels = 1;
+    numberOfWheels = 1;
   }
 }
 
 class Bicycle extends Cycle {
   Bicycle() {
-    NumberOfWheels = 2;
+    numberOfWheels = 2;
   }
 }
 
 class Tricycle extends Cycle {
   Tricycle() {
-    NumberOfWheels = 3;
+    numberOfWheels = 3;
   }
 }
 
@@ -23,11 +23,7 @@ public class Cycle {
     System.out.println("This is cycle");
   }
 
-  protected int NumberOfWheels = 0;
-
-  protected void wheels() {
-    System.out.println("Number of wheels: " + NumberOfWheels);
-  }
+  protected int numberOfWheels = 0;
 
   public static void main(String[] args) {
     Unicycle x = new Unicycle();
