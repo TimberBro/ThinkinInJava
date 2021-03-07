@@ -4,11 +4,19 @@ class Unicycle extends Cycle {
   Unicycle() {
     numberOfWheels = 1;
   }
+
+  void balance() {
+    System.out.println("Balance on one wheel.");
+  }
 }
 
 class Bicycle extends Cycle {
   Bicycle() {
     numberOfWheels = 2;
+  }
+
+  void balance() {
+    System.out.println("Balance on two wheels.");
   }
 }
 
