@@ -39,11 +39,16 @@ public class Cycle {
   protected int numberOfWheels = 0;
 
   public static void main(String[] args) {
-    Unicycle x = new Unicycle();
-    Bicycle y = new Bicycle();
-    Tricycle z = new Tricycle();
-    x.ride();
-    y.ride();
-    z.ride();
+    Cycle[] cycles = {new Unicycle(), new Bicycle(), new Tricycle()};
+    /*
+    for (Cycle i : cycles) {
+      i.balance(); // Compile error: Method not found.
+    }
+    */
+    ((Unicycle) cycles[0]).balance();
+    ((Bicycle) cycles[1]).balance();
+    //((Tricycle)cycles[2]).balance(); // Compile error: Method not found.
+    //((Unicycle)cycles[2]).balance(); // Run Time Error: Tricycle cannot be cast to Unicycle error
+
   }
 }
