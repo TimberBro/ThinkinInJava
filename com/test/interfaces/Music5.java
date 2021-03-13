@@ -2,21 +2,18 @@ package com.test.interfaces;
 
 import com.test.polymorphism.music.Note;
 
-abstract class Instrument {
-  // Compile-time constant:
-  int VALUE = 5; // static & final
-
-  // Cannot have method definitions:
-  void play(Note n) { // Automatically public
-
-  }
-
-  void adjust() {
-
-  }
+interface Playable {
+  void play(Note n);
 }
 
-class Wind extends Instrument {
+abstract class Instrument {
+  // Compile-time constant:
+  static final int VALUE = 5; // static & final
+
+  void adjust() {}
+}
+
+class Wind extends Instrument implements Playable {
   public void play(Note n) {
     System.out.println(this + ".play() " + n);
   }
@@ -30,7 +27,7 @@ class Wind extends Instrument {
   }
 }
 
-class Percussion extends Instrument {
+class Percussion extends Instrument implements Playable {
   public void play(Note n) {
     System.out.println(this + ".play() " + n);
   }
@@ -44,7 +41,7 @@ class Percussion extends Instrument {
   }
 }
 
-class Stringed extends Instrument {
+class Stringed extends Instrument implements Playable {
   public void play(Note n) {
     System.out.println(this + ".playO " + n);
   }
@@ -72,19 +69,19 @@ class Woodwind extends Wind {
 }
 
 public class Music5 {
-  static void tune(Instrument i) {
+  static void tune(Playable i) {
     i.play(Note.MIDDLE_C);
   }
 
-  static void tuneAll(Instrument[] e) {
-    for (Instrument i : e) {
+  static void tuneAll(Playable[] e) {
+    for (Playable i : e) {
       tune(i);
     }
   }
 
   public static void main(String[] args) {
     // Upcasting during addition to the array:
-    Instrument[] orchestra = {
+    Playable[] orchestra = {
       new Wind(), new Percussion(), new Stringed(), new Brass(), new Woodwind()
     };
     tuneAll(orchestra);
