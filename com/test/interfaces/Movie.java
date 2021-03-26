@@ -22,7 +22,7 @@ interface Killer extends SuperHero, Alien, Mutant {
   void destroy();
 }
 
-class Protagonist {
+abstract class Protagonist {
   void beBad() {}
 }
 
