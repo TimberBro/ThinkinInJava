@@ -1,4 +1,4 @@
-package com.test.interfaces.animalsV2;
+package com.test.interfaces.animalsv2;
 
 public class MouseV2 implements RodentV2 {
   public void type() {

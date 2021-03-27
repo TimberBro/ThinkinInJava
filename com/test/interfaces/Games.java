@@ -36,7 +36,12 @@ class Dice implements TossGame {
   @Override
   public void toss() {
     Random random = new Random();
-    System.out.println("First dice = " + (random.nextInt(6) + 1) + " , second dice = " + (random.nextInt(6) + 1) + ".");
+    System.out.println(
+        "First dice = "
+            + (random.nextInt(6) + 1)
+            + " , second dice = "
+            + (random.nextInt(6) + 1)
+            + ".");
   }
 }
 

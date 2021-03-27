@@ -18,7 +18,7 @@ interface ThirdNode extends FirstNode, SecondNode {
 
 class Worker implements ThirdNode {
   public void f() {
-    System.out.println("ThirdNode.f()"); //class must reimplement the method,
+    System.out.println("ThirdNode.f()"); // class must reimplement the method,
     // or the ambiguity will be rejected as a compile error
   }
 }

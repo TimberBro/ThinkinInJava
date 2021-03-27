@@ -1,6 +1,5 @@
 package com.test.interfaces.animals;
 
-
 import com.test.polymorphism.Shared;
 
 class Tail {
@@ -13,6 +12,7 @@ class Tail {
 
 public abstract class Rodent {
   private final Shared shared;
+
   abstract void type();
 
   private Tail tail = new Tail();
@@ -27,7 +27,9 @@ public abstract class Rodent {
   public static void main(String[] args) {
     System.out.println("Array declared");
     Shared shared = new Shared();
-    Rodent[] rodents = {new Mouse(shared), new Gerbil(shared), new Hamster(shared), new Gerbil(shared)};
+    Rodent[] rodents = {
+      new Mouse(shared), new Gerbil(shared), new Hamster(shared), new Gerbil(shared)
+      };
     System.out.println("Array filled");
     shared.showRefcount();
     for (Rodent value : rodents) {

@@ -2,6 +2,7 @@ package com.test.interfaces;
 
 public abstract class AbstractPrint {
   abstract void print();
+
   AbstractPrint() {
     print();
   }

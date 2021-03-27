@@ -2,7 +2,9 @@ package com.test.interfaces;
 
 interface FastFood {
   int getCalories();
+
   String getSauceType();
+
   String getDrinkName();
 }
 
@@ -48,11 +50,12 @@ class PortableLunch extends Lunch {
   }
 }
 
-public class Sandwich extends PortableLunch implements FastFood{
+public class Sandwich extends PortableLunch implements FastFood {
   private Bread b = new Bread();
   private Pickle p = new Pickle();
   private Cheese c = new Cheese();
   private Lettuce l = new Lettuce();
+
   public Sandwich() {
     System.out.println("Sandwich()");
   }

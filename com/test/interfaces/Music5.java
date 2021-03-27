@@ -83,7 +83,7 @@ public class Music5 {
     // Upcasting during addition to the array:
     Playable[] orchestra = {
       new Wind(), new Percussion(), new Stringed(), new Brass(), new Woodwind()
-    };
+      };
     tuneAll(orchestra);
   }
 }
