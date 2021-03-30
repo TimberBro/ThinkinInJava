@@ -1,10 +1,14 @@
 package com.test.innerclasses;
 
-class Sequence {
+public class Sequence4 {
   private Object[] items;
   private int next = 0;
 
-  public Sequence(int size) {
+  public void test() {
+    System.out.println("test()");
+  }
+
+  public Sequence4(int size) {
     items = new Object[size];
   }
 
@@ -30,34 +34,27 @@ class Sequence {
         i++;
       }
     }
+
+    public Sequence4 sequence4() {
+      return Sequence4.this;
+    }
   }
 
   public Selector selector() {
     return new SequenceSelector();
   }
-}
-
-public class StringHolder {
-  private String string;
-
-  StringHolder(String s) {
-    this.string = s;
-  }
-
-  public String toString() {
-    return string;
-  }
 
   public static void main(String[] args) {
-    Sequence sequence = new Sequence(4);
-    sequence.add(new StringHolder("Hola!"));
-    sequence.add(new StringHolder("Hello!"));
-    sequence.add(new StringHolder("Привет!"));
-    sequence.add(new StringHolder("Hallo!"));
+    Sequence4 sequence = new Sequence4(10);
+    for (int i = 0; i < 10; i++) {
+      sequence.add(Integer.toString(i));
+    }
     Selector selector = sequence.selector();
     while (!selector.end()) {
-      System.out.println(selector.current() + " ");
+      System.out.print(selector.current() + " ");
       selector.next();
     }
+
+    ((SequenceSelector) selector).sequence4().test();
   }
 }
