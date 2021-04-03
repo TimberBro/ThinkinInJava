@@ -7,14 +7,16 @@ interface Airplane {
 public class InnerClassReturnInterface {
 
   Airplane getAirplane() {
-    class Airport implements Airplane {
-      @Override
-      public void fly() {
-        System.out.println("Flying away!");
+      {
+      class Airport implements Airplane {
+        @Override
+        public void fly() {
+          System.out.println("Flying away!");
+        }
       }
-    }
 
-    return new Airport();
+      return new Airport();
+      }
   }
 
   public static void main(String[] args) {
