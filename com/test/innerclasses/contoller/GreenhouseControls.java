@@ -190,3 +190,40 @@ public class GreenhouseControls extends Controller {
     }
   }
 }
+
+
+class GreenhouseControlsMistGenerator extends GreenhouseControls {
+  private boolean mist = false;
+
+  public class MistGeneratorOn extends Event {
+    MistGeneratorOn(long delayTime) {
+      super(delayTime);
+    }
+
+    @Override
+    public void action() {
+      mist = true;
+    }
+
+    @Override
+    public String toString() {
+      return "Mist generator is on";
+    }
+  }
+
+  public class MistGeneratorOff extends Event {
+    MistGeneratorOff(long delayTime) {
+      super(delayTime);
+    }
+
+    @Override
+    public void action() {
+      mist = false;
+    }
+
+    @Override
+    public String toString() {
+      return "Mist generator is on";
+    }
+  }
+}
