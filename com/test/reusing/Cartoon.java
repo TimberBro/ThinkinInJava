@@ -13,9 +13,7 @@ class Drawing extends Art {
 }
 
 public class Cartoon extends Drawing {
-  public Cartoon() {
-    System.out.println("Cartoon constructor");
-  }
+  // Compiler will synthesize default constructor.
 
   public static void main(String[] args) {
     Cartoon x = new Cartoon();

@@ -14,10 +14,10 @@ class B {
 
 public class C extends A {
 
+  B b = new B(15);
 
   C(int i) {
     super(i);
-    B b = new B(15);
   }
 
   public static void main(String[] args) {

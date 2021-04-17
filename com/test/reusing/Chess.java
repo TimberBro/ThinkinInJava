@@ -9,6 +9,9 @@ class Game {
 class BoardGame extends Game {
   BoardGame(int i) {
     super(i);
+    // super(i) - method, calling non-default constructor of base-class.
+    // There is no default constructor available in Game class.
+    // Compiler will tell you, that it can't find a proper constructor for Game
     System.out.println("BoardGame constructor");
   }
 }
