@@ -1,14 +1,6 @@
 package com.test.access.connection;
 
-class Connection {
-  private static int counter = 0;
-  private int id = counter++;
+interface Connection {
 
-  Connection() {
-    System.out.println("Connection created");
-  }
-
-  public String toString() {
-    return "Connection " + id;
-  }
+  public String toString();
 }
