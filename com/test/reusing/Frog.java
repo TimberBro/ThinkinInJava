@@ -26,9 +26,9 @@ public class Frog extends Amphibian {
   }
 
   public static void main(String[] args) {
-    Frog frog = new Frog("Green", 4, 5);
-    System.out.println(frog.getColor());
-    System.out.println(frog.getNumberOfLegs());
-    System.out.println(frog.getLength());
+    Amphibian amphibian = new Frog("Green", 4, 5);
+    System.out.println(amphibian.getColor());
+    System.out.println(amphibian.getNumberOfLegs());
+    System.out.println(amphibian.getLength());
   }
 }
