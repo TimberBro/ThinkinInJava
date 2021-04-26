@@ -14,7 +14,7 @@ public class ConnectionManager {
     }
   }
 
-  private static ConnectionImpl[] pool = new ConnectionImpl[3];
+  private static Connection[] pool = new ConnectionImpl[3];
   private static int counter = 0;
 
   static {
@@ -23,9 +23,9 @@ public class ConnectionManager {
     }
   }
 
-  public static ConnectionImpl getConnection() {
+  public static Connection getConnection() {
     if (counter < pool.length) {
-      System.out.println("Connection issued. ID = " + pool[counter].id);
+      System.out.println("Connection issued. ID = " + pool[counter]);
       return pool[counter++];
     } else {
       System.out.println("Number of max connection exceeded.");
