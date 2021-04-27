@@ -1,16 +1,25 @@
 package com.test.reusing;
 
-import sun.security.krb5.internal.crypto.Des;
-
 public class ClassLoad {
-  public static void main(String[] args) {
-    //Class loading by the access of a static member.
-    System.out.println("Trying to access the static field");
-    System.out.println("Static field value = " + Desk.counter);
-    //Class loading by the creation of the first instance of that class
-    System.out.println("Trying to access the static field after creating an instance of the class.");
+
+  // Main method to prove, that loading may be caused by
+  // the creating of the first instance of that class.
+  public static void main(String arg) {
     Desk desk = new Desk();
+  }
+
+  // Main method to prove, that loading may be caused by
+  // access of a static member.
+  public static void main(Integer arg) {
+    System.out.println(Desk.counter);
+  }
+
+  // Main method to prove, that class loading takes place only once.
+  public static void main(String[] args) {
+    System.out.println("Load class by access of a static member");
     System.out.println("Static field value = " + Desk.counter);
+    // Creating an instance of the class will not load class one more time
+    Desk desk = new Desk();
   }
 }
 
