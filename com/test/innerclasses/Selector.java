@@ -1,6 +1,6 @@
 package com.test.innerclasses;
 
-interface Selector {
+public interface Selector {
   boolean end();
 
   Object current();

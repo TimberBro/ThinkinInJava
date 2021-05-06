@@ -2,30 +2,30 @@ package com.test.reusing;
 
 public class Soap {
   // Add delegation to Soap class
-  private Cleanser cleanser = new Cleanser();
+  private Detergent detergent = new Detergent();
 
   public String toString() {
-    return cleanser.toString();
+    return detergent.toString();
   }
 
   public void scrub() {
-    cleanser.append(" Soap.scrub()");
+    detergent.append(" Soap.scrub()");
   }
 
   public void sterillize() {
-    cleanser.append(" sterillize()");
+    detergent.append(" sterillize()");
   }
 
   public void dilute() {
-    cleanser.dilute();
+    detergent.dilute();
   }
 
   public void apply() {
-    cleanser.apply();
+    detergent.apply();
   }
 
   public void foam() {
-    cleanser.append(" foam() ");
+    detergent.foam();
   }
 
   public static void main(String[] args) {
