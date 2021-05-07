@@ -2,16 +2,12 @@ package com.test.holding;
 
 import java.util.*;
 
-
-
-
 public class CrossContainerlteration {
   public static void display(Iterator<String> iterator) {
     while (iterator.hasNext()) {
       System.out.println(iterator.next().toString());
     }
   }
-
 
   public static void main(String[] args) {
     ArrayList<String> nameAL = new ArrayList<String>();
