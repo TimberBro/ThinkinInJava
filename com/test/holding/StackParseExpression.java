@@ -15,7 +15,7 @@ public class StackParseExpression {
           break;
         }
         case '-': {
-            System.out.println(stack.pop());
+            System.out.print(stack.pop());
         }
       }
     }
