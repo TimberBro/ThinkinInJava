@@ -6,11 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StoreFile {
-
-  public static void main(String[] args) {
+  static Map<String, ArrayList<Integer>> textFileToMap(String fullPath) {
     Map<String, ArrayList<Integer>> container = new HashMap<>();
     int counter = 0;
-    for (String s : new TextFile("Text.txt", "\\W+")) {
+    for (String s : new TextFile(fullPath, "\\W+")) {
       ArrayList<Integer> wordLocation = container.get(s);
       if (wordLocation == null) {
         wordLocation = new ArrayList<>();
@@ -18,6 +17,10 @@ public class StoreFile {
       }
       wordLocation.add(counter++);
     }
-    System.out.println(container);
+    return (container);
+  }
+
+  public static void main(String[] args) {
+    System.out.println(textFileToMap("Text.txt"));
   }
 }
