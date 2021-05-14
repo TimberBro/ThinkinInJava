@@ -16,6 +16,8 @@ public class RecreateFile {
         sortedContainer.put(counter, entry.getKey());
       }
     }
-    System.out.println(sortedContainer.values());
+    for (Integer word : sortedContainer.keySet()) {
+      System.out.print(sortedContainer.get(word) + ' ');
+    }
   }
 }
