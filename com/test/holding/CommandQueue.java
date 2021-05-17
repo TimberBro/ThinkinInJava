@@ -19,7 +19,7 @@ class Command {
 class QueueFiller {
   static Queue<Command> fill(Queue<Command> queue) {
     for (int i = 0; i < 10 ; i++) {
-      queue.add(new Command());
+      queue.offer(new Command());
     }
     return queue;
   }
