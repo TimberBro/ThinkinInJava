@@ -1,6 +1,7 @@
 package com.test.holding;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Gerbil {
   private int number;
@@ -22,8 +23,10 @@ public class Gerbil {
     gerbils.add(new Gerbil(4));
     gerbils.add(new Gerbil(5));
     gerbils.add(new Gerbil(6));
-    for (Gerbil i : gerbils) {
-      i.hop();
+    Iterator<Gerbil> it = gerbils.iterator();
+    while (it.hasNext()) {
+      Gerbil gerbil = it.next();
+      gerbil.hop();
     }
   }
 }
