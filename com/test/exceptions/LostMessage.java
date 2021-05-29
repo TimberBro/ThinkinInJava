@@ -12,12 +12,6 @@ class HoHumException extends Exception {
   }
 }
 
-class AnotherException extends Exception {
-  public String toString() {
-    return "Another exception";
-  }
-}
-
 public class LostMessage {
   void f() throws VeryImportantException {
     throw new VeryImportantException();
@@ -27,21 +21,17 @@ public class LostMessage {
     throw new HoHumException();
   }
 
-  void g() throws AnotherException {
-    throw new AnotherException();
-  }
-
   public static void main(String[] args) {
     try {
       LostMessage lm = new LostMessage();
       try {
-        try {
-          lm.f();
-        } finally {
-          lm.dispose();
-        }
+        lm.f();
       } finally {
-        lm.g();
+        try {
+          lm.dispose();
+        } catch (HoHumException e) {
+          System.out.println(e);
+        }
       }
     } catch (Exception e) {
       System.out.println(e);
