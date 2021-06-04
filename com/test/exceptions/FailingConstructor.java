@@ -35,6 +35,12 @@ public class FailingConstructor {
     disposable2 = new DisposableObject();
   }
 
+  void dispose() {
+    disposable1.dispose();
+    disposable2.dispose();
+    System.out.println("Main object was disposed");
+  }
+
   public static void main(String[] args) {
     boolean[] b = {true, false};
     for (boolean bool : b) {
@@ -45,6 +51,7 @@ public class FailingConstructor {
           System.out.println("Inner try");
         } finally {
           System.out.println("Finally");
+          constructor.dispose();
         }
       } catch (IncorrectName e) {
         System.out.println("Caught error: " + e);
