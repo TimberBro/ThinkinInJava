@@ -1,6 +1,6 @@
 package com.test.exceptions;
 
-class NullString extends Exception {
+class NullString extends RuntimeException {
   String msg;
 
   NullString(String str) {
@@ -15,12 +15,9 @@ class NullString extends Exception {
 
 public class MyException {
 
+  // Compiler won't force you to use try-catch block, if your exception inherit from
+  // RuntimeException
   public static void main(String[] args) {
-    try {
-      throw new NullString("StringNotFound");
-    } catch (NullString e) {
-      System.out.println(e.getMessage());
-      e.printStackTrace();
-    }
+    throw new NullString("StringNotFound");
   }
 }
