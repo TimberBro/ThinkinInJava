@@ -13,6 +13,6 @@ public class Splitting {
   }
 
   public static void main(String[] args) {
-    split("you|the");
+    System.out.println(knights.replaceAll("([AEIOU]|[aeiou])", "_"));
   }
 }
