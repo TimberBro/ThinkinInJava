@@ -1,6 +1,6 @@
 package com.test.strings;
 
-public class RegexTest {
+public class Exercise7 {
 
   public static void main(String[] args) {
     String[] tests = {
