@@ -1,16 +1,30 @@
 package com.test.strings;
 
 import com.test.util.TextFile;
+import java.io.File;
+import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JGrep {
 
+  static void examine(Pattern p, File file) throws IOException {
+    int index = 0;
+    Matcher m = p.matcher("");
+    for (String line : new TextFile(file.getCanonicalPath())) {
+      m.reset(line);
+      while (m.find()) {
+        System.out.println(index++ + ": " + m.group() + ": " + m.start());
+      }
+    }
+  }
+
   public static void main(String[] args) throws Exception {
     if (args.length < 2) {
       System.out.println("Usage: java JGrep file regex flag");
       System.out.println(
-          "Accepted flags: UNIX_LINES, CASE_INSENSITIVE, COMMENTS, MULTILINE, LITERAL, DOTALL, UNICODE_CASE, CANON_EQ, UNICODE_CHARACTER_CLASS");
+          "Accepted flags: UNIX_LINES, CASE_INSENSITIVE, COMMENTS, MULTILINE, LITERAL, DOTALL, "
+              + "UNICODE_CASE, CANON_EQ, UNICODE_CHARACTER_CLASS");
       System.exit(0);
     }
     Pattern p;
@@ -47,13 +61,14 @@ public class JGrep {
     }
     p = Pattern.compile(args[1]);
     // Iterate through the lines of the input file:
-    int index = 0;
-    Matcher m = p.matcher("");
-    for (String line : new TextFile(args[0])) {
-      m.reset(line);
-      while (m.find()) {
-        System.out.println(index++ + ": " + m.group() + ": " + m.start());
+    if (new File(args[0]).isDirectory()) {
+      File[] files = new File(args[0]).listFiles();
+      for (File file : files) {
+        System.out.println("Working with file: " + file.getCanonicalFile());
+        examine(p, file);
       }
+    } else {
+      examine(p, new File(args[0]));
     }
   }
 }
