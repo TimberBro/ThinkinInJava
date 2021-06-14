@@ -47,11 +47,17 @@ public class Shapes {
     Shape shape = new Rhomboid();
     shape.draw();
     // Downcast back to Rhomboid
-    Rhomboid rhomboid = (Rhomboid) shape;
-    rhomboid.draw();
+    if (shape instanceof Rhomboid) {
+      Rhomboid rhomboid = (Rhomboid) shape;
+      rhomboid.draw();
+    }
     // Downcast back to Circle. Will be successfully compiled, but will give
     // java.lang.ClassCastException
-    Circle circle = (Circle) shape;
-    circle.draw();
+    if (shape instanceof Circle) {
+      Circle circle = (Circle) shape;
+      circle.draw();
+    } else {
+      System.out.println("Cannot downcast to Circle");
+    }
   }
 }
