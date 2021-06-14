@@ -8,6 +8,14 @@ abstract class Shape {
     System.out.println(this + ".draw()");
   }
 
+  void rotate(int degrees, boolean clockwise) {
+    if (clockwise) {
+      System.out.println(this + " was rotated " + degrees + " degrees clockwise");
+    } else {
+      System.out.println(this + " was rotated " + degrees + " degrees counterclockwise");
+    }
+  }
+
   public abstract String toString();
 }
 
@@ -29,35 +37,17 @@ class Triangle extends Shape {
   }
 }
 
-class Rhomboid extends Shape {
-
-  @Override
-  public String toString() {
-    return "Rhomboid";
-  }
-}
-
 public class Shapes {
   public static void main(String[] args) {
     List<Shape> shapeList = Arrays.asList(new Circle(), new Square(), new Triangle());
     for (Shape shape : shapeList) {
       shape.draw();
     }
-    // Upcast to shape
-    Shape shape = new Rhomboid();
-    shape.draw();
-    // Downcast back to Rhomboid
-    if (shape instanceof Rhomboid) {
-      Rhomboid rhomboid = (Rhomboid) shape;
-      rhomboid.draw();
-    }
-    // Downcast back to Circle. Will be successfully compiled, but will give
-    // java.lang.ClassCastException
-    if (shape instanceof Circle) {
-      Circle circle = (Circle) shape;
-      circle.draw();
-    } else {
-      System.out.println("Cannot downcast to Circle");
+
+    for (Shape shape : shapeList) {
+      if (!(shape instanceof Circle)) {
+        shape.rotate(15, true);
+      }
     }
   }
 }
