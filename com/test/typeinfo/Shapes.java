@@ -4,16 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 
 abstract class Shape {
+  boolean highlighted = false;
+
   void draw() {
-    System.out.println(this + ".draw()");
+    System.out.println(this + ".draw(); Highlighted: " + highlighted);
   }
 
-  void rotate(int degrees, boolean clockwise) {
-    if (clockwise) {
-      System.out.println(this + " was rotated " + degrees + " degrees clockwise");
-    } else {
-      System.out.println(this + " was rotated " + degrees + " degrees counterclockwise");
-    }
+  void setHighlight() {
+    highlighted = true;
+  }
+
+  void clearHighlight() {
+    highlighted = false;
   }
 
   public abstract String toString();
@@ -38,16 +40,17 @@ class Triangle extends Shape {
 }
 
 public class Shapes {
+  static void highlightCircle(Shape shape) {
+    if (shape instanceof Circle) {
+      shape.setHighlight();
+    }
+  }
+
   public static void main(String[] args) {
     List<Shape> shapeList = Arrays.asList(new Circle(), new Square(), new Triangle());
     for (Shape shape : shapeList) {
+      highlightCircle(shape);
       shape.draw();
-    }
-
-    for (Shape shape : shapeList) {
-      if (!(shape instanceof Circle)) {
-        shape.rotate(15, true);
-      }
     }
   }
 }
