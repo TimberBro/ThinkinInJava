@@ -6,6 +6,8 @@ interface Waterproof {}
 
 interface Shoots {}
 
+interface Wireless {}
+
 class Toy {
   // The class that's being created with newInstance() must have a default constructor.
   //
@@ -14,7 +16,7 @@ class Toy {
   Toy(int i) {}
 }
 
-class FancyToy extends Toy implements HasBatteries, Waterproof, Shoots {
+class FancyToy extends Toy implements HasBatteries, Waterproof, Shoots, Wireless {
   FancyToy() {
     super(1);
   }
@@ -22,8 +24,7 @@ class FancyToy extends Toy implements HasBatteries, Waterproof, Shoots {
 
 public class ToyTest {
   static void printInfo(Class cc) {
-    System.out.println("Class name: " + cc.getName()
-        + " is interface? [" + cc.isInterface() + "]");
+    System.out.println("Class name: " + cc.getName() + " is interface? [" + cc.isInterface() + "]");
     System.out.println("Simple name: " + cc.getSimpleName());
     System.out.println("Canonical name : " + cc.getCanonicalName());
   }
