@@ -1,16 +1,27 @@
 package com.test.typeinfo;
 
-class A {}
+import java.util.Arrays;
 
-class B extends A {}
+class A {
+  int number;
+  long price;
+}
 
-class C extends B {}
+class B extends A {
+  String name;
+}
+
+class C extends B {
+  String forname;
+  String status;
+}
 
 public class ObjectHierarchy {
 
   static void getHierarchy(Object object) {
     if (object.getClass().getSuperclass() != null) {
       System.out.println(object.getClass());
+      System.out.println(Arrays.toString(object.getClass().getDeclaredFields()));
       try {
         getHierarchy(object.getClass().getSuperclass().newInstance());
       } catch (IllegalAccessException e) {
