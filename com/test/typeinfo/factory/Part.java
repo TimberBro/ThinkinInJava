@@ -1,6 +1,7 @@
 package com.test.typeinfo.factory;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -9,24 +10,28 @@ public class Part {
     return getClass().getSimpleName();
   }
 
-  static List<Factory<? extends Part>> partFactories = new ArrayList<Factory<? extends Part>>();
-
-  static {
-    // Collections.addAll() gives an "unchecked generic
-    // array creation ... for varargs parameter" warning.
-    partFactories.add(new FuelFilter.Factory());
-    partFactories.add(new AirFilter.Factory());
-    partFactories.add(new CabinAirFilter.Factory());
-    partFactories.add(new OilFilter.Factory());
-    partFactories.add(new FanBelt.Factory());
-    partFactories.add(new PowerSteeringBelt.Factory());
-    partFactories.add(new GeneratorBelt.Factory());
-  }
+  @SuppressWarnings("unchecked")
+  public static final List<Class<? extends Part>> allParts =
+      Collections.unmodifiableList(
+          Arrays.asList(
+              AirFilter.class,
+              Belt.class,
+              CabinAirFilter.class,
+              FanBelt.class,
+              Filter.class,
+              FuelFilter.class,
+              GeneratorBelt.class,
+              OilFilter.class,
+              PowerSteeringBelt.class));
 
   private static Random rand = new Random(47);
 
   public static Part createRandom() {
-    int n = rand.nextInt(partFactories.size());
-    return partFactories.get(n).create();
+    int n = rand.nextInt(allParts.size());
+    try {
+      return allParts.get(n).newInstance();
+    } catch (InstantiationException | IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
   }
 }
