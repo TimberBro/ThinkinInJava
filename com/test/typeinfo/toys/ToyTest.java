@@ -1,5 +1,7 @@
 package com.test.typeinfo.toys;
 
+import java.lang.reflect.Constructor;
+
 interface HasBatteries {}
 
 interface Waterproof {}
@@ -9,16 +11,19 @@ interface Shoots {}
 interface Wireless {}
 
 class Toy {
-  // The class that's being created with newInstance() must have a default constructor.
-  //
-  Toy() {}
+  int strength;
 
-  Toy(int i) {}
+  public Toy(int i) {
+    this.strength = i;
+    System.out.println("Toy was created!");
+  }
 }
 
 class FancyToy extends Toy implements HasBatteries, Waterproof, Shoots, Wireless {
-  FancyToy() {
-    super(1);
+
+  public FancyToy(int i) {
+    super(i);
+    System.out.println("FancyToy was created. Strength = " + i);
   }
 }
 
@@ -29,31 +34,29 @@ public class ToyTest {
     System.out.println("Canonical name : " + cc.getCanonicalName());
   }
 
+  static Toy getToy(String className, int strength) throws ClassNotFoundException {
+    Class c = Class.forName(className);
+    Constructor[] constructors = c.getConstructors();
+    for (Constructor cnstr : constructors) {
+      Class[] parameters = cnstr.getParameterTypes();
+      if (parameters.length == 1) {
+        if (parameters[0] == int.class) {
+          try {
+            return (Toy) cnstr.newInstance(strength);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        }
+      }
+    }
+    return null;
+  }
+
   public static void main(String[] args) {
-    Class c = null;
     try {
-      c = Class.forName("com.test.typeinfo.toys.FancyToy");
+      getToy("com.test.typeinfo.toys.FancyToy", 25);
     } catch (ClassNotFoundException e) {
-      System.out.println("Can't find FancyToy");
-      System.exit(1);
-    }
-    printInfo(c);
-    for (Class face : c.getInterfaces()) {
-      printInfo(face);
-    }
-    Class up = c.getSuperclass();
-    Object obj = null;
-    try {
-      // Requires default constructor:
-      obj = up.newInstance();
-    } catch (InstantiationException e) {
-      System.out.println("Cannot instantiate");
       e.printStackTrace();
-      System.exit(1);
-    } catch (IllegalAccessException e) {
-      System.out.println("Cannot access");
-      System.exit(1);
     }
-    printInfo(obj.getClass());
   }
 }
