@@ -17,12 +17,10 @@ class DynamicProxyHandler implements InvocationHandler {
         System.out.println(" " + arg);
       }
     }
-    long start = System.currentTimeMillis();
-    Thread.sleep(100);
-    Object request = method.invoke(proxied, args);
-    System.out.println(
-        "Execution time = " + (System.currentTimeMillis() - start) + " milliseconds");
-    return request;
+    // System.out.println("Proxy: " + proxy);
+    // This row will lead to java.lang.StackOverflowError error.
+    // Because we called proxy.toString() and toString method will be proxied.
+    return method.invoke(proxied, args);
   }
 }
 
