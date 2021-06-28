@@ -5,10 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Part {
-  public String toString() {
-    return getClass().getSimpleName();
-  }
+public interface Part {
+  public String toString();
 
   @SuppressWarnings("unchecked")
   public static final List<Class<? extends Part>> allParts =
@@ -24,7 +22,7 @@ public class Part {
               OilFilter.class,
               PowerSteeringBelt.class));
 
-  private static Random rand = new Random(47);
+  static Random rand = new Random(47);
 
   public static Part createRandom() {
     int n = rand.nextInt(allParts.size());

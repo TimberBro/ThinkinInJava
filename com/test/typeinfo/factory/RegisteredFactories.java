@@ -1,30 +1,70 @@
 package com.test.typeinfo.factory;
 
-import com.test.typeinfo.factory.*;
-import java.util.*;
+class Filter extends PartImpl {}
 
-class Filter extends Part {}
+class FuelFilter extends Filter {
+  // Create a Class Factory for each specific type:
+  public static class Factory implements com.test.typeinfo.factory.Factory<FuelFilter> {
+    public FuelFilter create() {
+      return new FuelFilter();
+    }
+  }
+}
 
-class FuelFilter extends Filter {}
+class AirFilter extends Filter {
+  public static class Factory implements com.test.typeinfo.factory.Factory<AirFilter> {
+    public AirFilter create() {
+      return new AirFilter();
+    }
+  }
+}
 
-class AirFilter extends Filter {}
+class CabinAirFilter extends Filter {
+  public static class Factory implements com.test.typeinfo.factory.Factory<CabinAirFilter> {
+    public CabinAirFilter create() {
+      return new CabinAirFilter();
+    }
+  }
+}
 
-class CabinAirFilter extends Filter {}
+class OilFilter extends Filter {
+  public static class Factory implements com.test.typeinfo.factory.Factory<OilFilter> {
+    public OilFilter create() {
+      return new OilFilter();
+    }
+  }
+}
 
-class OilFilter extends Filter {}
+class Belt extends PartImpl {}
 
-class Belt extends Part {}
+class FanBelt extends Belt {
+  public static class Factory implements com.test.typeinfo.factory.Factory<FanBelt> {
+    public FanBelt create() {
+      return new FanBelt();
+    }
+  }
+}
 
-class FanBelt extends Belt {}
+class GeneratorBelt extends Belt {
+  public static class Factory implements com.test.typeinfo.factory.Factory<GeneratorBelt> {
+    public GeneratorBelt create() {
+      return new GeneratorBelt();
+    }
+  }
+}
 
-class GeneratorBelt extends Belt {}
-
-class PowerSteeringBelt extends Belt {}
+class PowerSteeringBelt extends Belt {
+  public static class Factory implements com.test.typeinfo.factory.Factory<PowerSteeringBelt> {
+    public PowerSteeringBelt create() {
+      return new PowerSteeringBelt();
+    }
+  }
+}
 
 public class RegisteredFactories {
   public static void main(String[] args) {
-    for (int i = 0; i < 10; i++) {
-      System.out.println(Part.createRandom());
-    }
+    // for (int i = 0; i < 10; i++) {System.out.println(Part.createRandom());
+    System.out.println(PartImpl.nullPart(AirFilter.class));
+    System.out.println(PartImpl.nullPart(FuelFilter.class));
   }
 }
