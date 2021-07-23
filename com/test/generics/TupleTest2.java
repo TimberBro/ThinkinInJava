@@ -4,6 +4,7 @@ import static com.test.util.Tuple.tuple;
 
 import com.test.util.FiveTuple;
 import com.test.util.FourTuple;
+import com.test.util.SixTuple;
 import com.test.util.ThreeTuple;
 import com.test.util.TwoTuple;
 
@@ -28,6 +29,10 @@ public class TupleTest2 {
     return tuple(new Vehicle(), new Amphibian(), "hi", 47, 11.1);
   }
 
+  static SixTuple<Vehicle, Amphibian, Float, String, Integer, Double> l() {
+    return tuple(new Vehicle(), new Amphibian(), 42.1f, "hi", 47, 11.1);
+  }
+
   public static void main(String[] args) {
     TwoTuple<String, Integer> ttsi = f();
     System.out.println(ttsi);
@@ -37,5 +42,6 @@ public class TupleTest2 {
     System.out.println(g());
     System.out.println(h());
     System.out.println(k());
+    System.out.println(l());
   }
 }
