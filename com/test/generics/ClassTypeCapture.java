@@ -8,7 +8,7 @@ class Building {}
 class House extends Building {}
 
 public class ClassTypeCapture<T> {
-  Map<String, Class<?>> classMap = new LinkedHashMap<>();
+  Map<String, FactoryI<?>> classMap = new LinkedHashMap<>();
   Class<T> kind;
 
   public ClassTypeCapture(Class<T> kind) {
@@ -19,16 +19,14 @@ public class ClassTypeCapture<T> {
     return kind.isInstance(arg);
   }
 
-  public void addType(String typename, Class<?> kind) {
-    classMap.put(typename, kind);
+  public void addType(String typename, FactoryI<?> factory) {
+    classMap.put(typename, factory);
   }
 
-  public Object createNew(String typename) {
-    Class cls = classMap.get(typename);
+  public Object createNew(String factoryName, int i) {
+    FactoryI<?> factory = classMap.get(factoryName);
     try {
-      return cls.newInstance();
-    } catch (IllegalAccessException | InstantiationException e) {
-      e.printStackTrace();
+      return factory.create(i);
     } catch (NullPointerException e) {
       System.out.println(
           "Cannot produce object of this type. "
@@ -44,8 +42,8 @@ public class ClassTypeCapture<T> {
     ClassTypeCapture<House> ctt2 = new ClassTypeCapture<House>(House.class);
     System.out.println(ctt2.f(new Building()));
     System.out.println(ctt2.f(new House()));
-    System.out.println(ctt2.createNew("Sloop"));
-    ctt2.addType("Sloop", Sloop.class);
-    System.out.println(ctt2.createNew("Sloop"));
+    System.out.println(ctt2.createNew("Integer", 1));
+    ctt2.addType("Integer", new IntegerFactory());
+    System.out.println(ctt2.createNew("Integer", 1));
   }
 }
