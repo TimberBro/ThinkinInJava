@@ -1,20 +1,33 @@
 package com.test.generics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class FixedSizeStack<T> {
   private int index = 0;
-  private Object[] storage;
+  private int size;
+  private List<T> storage;
 
   public FixedSizeStack(int size) {
-    storage = new Object[size];
+    storage = new ArrayList<T>(size);
+    this.size = size;
   }
 
   public void push(T item) {
-    storage[index++] = item;
+    if (index < size) {
+      index++;
+      storage.add(item);
+    } else {
+      throw new RuntimeException("Cannot add item: \"" + item + "\". The stack is full.");
+    }
   }
 
-  @SuppressWarnings("unchecked")
   public T pop() {
-    return (T) storage[--index];
+    if (index > 0) {
+      return (T) storage.remove(--index);
+    } else {
+      throw new RuntimeException("Cannot return item. The stack is empty");
+    }
   }
 }
 
@@ -24,14 +37,14 @@ public class GenericCast {
   public static void main(String[] args) {
     FixedSizeStack<String> strings = new FixedSizeStack<String>(SIZE);
     try {
-      for (String s : "A B C D E F G H I J K".split(" ")) {
+      for (String s : "A B C D E F G H I J".split(" ")) {
         strings.push(s);
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
     try {
-      for (int i = 0; i < SIZE + 1; i++) {
+      for (int i = 0; i < SIZE; i++) {
         String s = strings.pop();
         System.out.print(s + " ");
       }
