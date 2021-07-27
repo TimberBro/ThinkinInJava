@@ -1,7 +1,16 @@
-//: typeinfo/pets/EgyptianMau.java
+// : typeinfo/pets/EgyptianMau.java
 package com.test.typeinfo.pets;
 
 public class EgyptianMau extends Cat {
-  public EgyptianMau(String name) { super(name); }
-  public EgyptianMau() { super(); }
-} ///:~
+  public EgyptianMau(String name) {
+    super(name);
+  }
+
+  public EgyptianMau() {
+    super();
+  }
+
+  public void speak() {
+    System.out.println("EgyptianMau.speak()");
+  }
+} /// :~
