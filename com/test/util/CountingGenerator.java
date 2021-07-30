@@ -91,4 +91,14 @@ public class CountingGenerator {
       return result;
     }
   }
+
+  public static class BigDecimal implements Generator<java.math.BigDecimal> {
+    private java.math.BigDecimal value = new java.math.BigDecimal(0);
+
+    public java.math.BigDecimal next() {
+      java.math.BigDecimal result = value;
+      value = value.add(new java.math.BigDecimal(1));
+      return result;
+    }
+  }
 }
