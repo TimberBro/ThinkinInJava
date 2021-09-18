@@ -2,7 +2,6 @@ package com.test.containers;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.TreeMap;
 
 public class AssociativeArray<K, V> {
@@ -13,14 +12,28 @@ public class AssociativeArray<K, V> {
     pairs = new Object[length][2];
   }
 
+  // Need to alternate this method
   public void put(K key, V value) {
-    if (index >= pairs.length) throw new ArrayIndexOutOfBoundsException();
+    // Check if pair already exist. If it is, then we need to store new value.
+    for (int i = 0; i < index; i++) {
+      if (key.equals(pairs[i][0])) {
+        pairs[i] = new Object[] {key, value};
+        return;
+      }
+    }
+    if (index >= pairs.length) {
+      throw new ArrayIndexOutOfBoundsException();
+    }
     pairs[index++] = new Object[] {key, value};
   }
 
   @SuppressWarnings("unchecked")
   public V get(K key) {
-    for (int i = 0; i < index; i++) if (key.equals(pairs[i][0])) return (V) pairs[i][1];
+    for (int i = 0; i < index; i++) {
+      if (key.equals(pairs[i][0])) {
+        return (V) pairs[i][1];
+      }
+    }
     return null; // Did not find key
   }
 
@@ -30,7 +43,9 @@ public class AssociativeArray<K, V> {
       result.append(pairs[i][0].toString());
       result.append(" : ");
       result.append(pairs[i][1].toString());
-      if (i < index - 1) result.append("\n");
+      if (i < index - 1) {
+        result.append("\n");
+      }
     }
     return result.toString();
   }
