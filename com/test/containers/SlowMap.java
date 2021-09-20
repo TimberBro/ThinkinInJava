@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class SlowMap<K, V> extends AbstractMap<K, V> {
+public class SlowMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
   private List<K> keys = new ArrayList<>();
   private List<V> values = new ArrayList<>();
 
