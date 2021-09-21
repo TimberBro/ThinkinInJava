@@ -12,8 +12,10 @@ public class WordCounter {
     for (String s : new TextFile("com\\test\\util\\test.txt", "\\W+")) {
       if (words.get(s) != null) {
         words.put(s, words.get(s) + 1);
+        System.out.println(s);
       } else {
         words.put(s, 1);
+        System.out.println(s);
       }
     }
     System.out.println(words);

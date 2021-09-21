@@ -33,6 +33,8 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
         oldValue = iPair.getValue();
         it.set(pair); // Replace old with new
         found = true;
+        System.out.println(
+            "Collision was found on key: " + iPair.getKey() + ".\nPrevious value = " + oldValue);
         break;
       }
     }
