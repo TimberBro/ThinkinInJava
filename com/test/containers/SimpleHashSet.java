@@ -88,10 +88,7 @@ public class SimpleHashSet<T> extends AbstractSet<T> {
         if (canRemove) {
           canRemove = false;
           buckets[index1].remove(--index2);
-          if (buckets[index1].isEmpty()) {
-            buckets[index1++] = null;
-            --count;
-          }
+          --count;
         } else {
           throw new IllegalStateException();
         }
