@@ -9,7 +9,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 
-public class SimpleHashMap<K, V> extends AbstractMap<K, V> {
+public class SimpleHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
   // Choose a prime number for the hash table
   // size, to achieve a uniform distribution:
   static final int SIZE = 997;
