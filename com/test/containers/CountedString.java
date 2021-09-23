@@ -9,11 +9,9 @@ public class CountedString {
   private static List<String> created = new ArrayList<>();
   private String s;
   private int id = 0;
-  private char c;
 
-  public CountedString(String str, char ch) {
+  public CountedString(String str) {
     s = str;
-    c = ch;
     created.add(s);
     // id is the total number of instances
     // of this string in use by CountedString:
@@ -25,32 +23,29 @@ public class CountedString {
   }
 
   public String toString() {
-    return "String: " + s + " id: " + id + " char: " + c + " hashCode(): " + hashCode();
+    return "String: " + s + " id: " + id + " hashCode(): " + hashCode();
   }
 
   public int hashCode() {
-    // The very simple approach:
-    // return s.hashCode() * id;
-    // Using Joshua Bloch's recipe:
+    // Code still compiling and working, but this implementation will be slower, than previous one.
+    // Now object with same String value will be stored in one bucket and we must use equals()
+    // method to find correct from container.
     int result = 17;
     result = 37 * result + s.hashCode();
-    result = 37 * result + id;
-    result = 37 * result + c;
     return result;
   }
 
   public boolean equals(Object o) {
     return o instanceof CountedString
         && s.equals(((CountedString) o).s)
-        && id == ((CountedString) o).id
-        && c == ((CountedString) o).c;
+        && id == ((CountedString) o).id;
   }
 
   public static void main(String[] args) {
     Map<CountedString, Integer> map = new HashMap<>();
     CountedString[] cs = new CountedString[5];
     for (int i = 0; i < cs.length; i++) {
-      cs[i] = new CountedString("hi", 'c');
+      cs[i] = new CountedString("hi");
       map.put(cs[i], i); // Autobox int -> Integer
     }
     System.out.println(map);
