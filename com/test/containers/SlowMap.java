@@ -4,31 +4,42 @@ import com.test.util.Countries;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class SlowMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
-  private List<K> keys = new ArrayList<>();
-  private List<V> values = new ArrayList<>();
+  private List<MapEntry<K, V>> entries = new ArrayList<>();
+  // private List<V> values = new ArrayList<>();
+  private Comparator<MapEntry<K, V>> comparator = new MapEntryComparator<>();
 
   public V put(K key, V value) {
-    V oldValue = get(key); // The old value or null
-    if (!keys.contains(key)) {
-      keys.add(key);
-      values.add(value);
+    MapEntry<K, V> candidate = new MapEntry<>(key, value);
+    V oldValue = candidate.getValue(); // The old value or null
+    if (!entries.contains(candidate)) {
+      entries.add(candidate);
+      Collections.sort(entries, comparator);
     } else {
-      values.set(keys.indexOf(key), value);
+      entries.set(entries.indexOf(candidate), candidate);
     }
     return oldValue;
   }
 
   public V get(Object key) { // key is type Object, not K
-    if (!keys.contains(key)) {
-      return null;
+    MapEntry<K, V> entry = getEntry(key);
+    return entry == null ? null : entry.getValue();
+  }
+
+  protected MapEntry<K, V> getEntry(Object key) {
+    MapEntry<K, V> searchEntry = new MapEntry<>((K) key, null);
+    int index = Collections.binarySearch(entries, searchEntry, comparator);
+    if (index >= 0) {
+      return entries.get(index);
     }
-    return values.get(keys.indexOf(key));
+    return null;
   }
 
   private EntrySet entrySet;
@@ -49,17 +60,16 @@ public class SlowMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
         private int index = -1;
 
         public boolean hasNext() {
-          return index < keys.size() - 1;
+          return index < entries.size() - 1;
         }
 
         public Map.Entry<K, V> next() {
           ++index;
-          return new MapEntry<>(keys.get(index), values.get(index));
+          return entries.get(index);
         }
 
         public void remove() {
-          keys.remove(index);
-          values.remove(index);
+          entries.remove(index);
           // Before move to the next key
           index--;
         }
@@ -68,7 +78,7 @@ public class SlowMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
 
     // Adapted from HashMap
     public final int size() {
-      return keys.size();
+      return entries.size();
     }
 
     // From HashMap
@@ -78,7 +88,7 @@ public class SlowMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
       }
       Map.Entry<K, V> e = (Map.Entry<K, V>) o;
       K key = e.getKey();
-      if (keys.contains(key)) {
+      if (entries.contains(key)) {
         return e.equals(new MapEntry<>(key, get(key)));
       }
       return false;
@@ -90,8 +100,7 @@ public class SlowMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
         MapEntry<K, V> e = (MapEntry<K, V>) o;
         K key = e.getKey();
         V val = e.getValue();
-        keys.remove(key);
-        values.remove(val);
+        entries.remove(key);
         return true;
       }
       return false;
@@ -99,8 +108,7 @@ public class SlowMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
 
     @Override
     public void clear() {
-      keys.clear();
-      values.clear();
+      entries.clear();
     }
   }
 
@@ -108,7 +116,7 @@ public class SlowMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
     SlowMap<String, String> m = new SlowMap<>();
     m.putAll(Countries.capitals(15));
     System.out.println(m);
-    System.out.println(m.get("BULGARIA"));
+    System.out.println(m.get("BENIN"));
     System.out.println(m.entrySet());
     m.clear();
     System.out.println(m.entrySet());
