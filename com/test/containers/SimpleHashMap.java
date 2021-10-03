@@ -10,17 +10,22 @@ import java.util.Map;
 import java.util.Set;
 
 public class SimpleHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V> {
+
   // Choose a prime number for the hash table
   // size, to achieve a uniform distribution:
-  static final int SIZE = 997;
+  private static final int initialCapacity = 16;
+  private int count;
+  private static final double loadFactor = 0.75;
+  private int capacity = initialCapacity;
+  private int threshold = (int) (capacity * loadFactor);
   // You can't have a physical array of generics,
   // but you can upcast to one:
   @SuppressWarnings("unchecked")
-  LinkedList<MapEntry<K, V>>[] buckets = new LinkedList[SIZE];
+  LinkedList<MapEntry<K, V>>[] buckets = new LinkedList[capacity];
 
   public V put(K key, V value) {
     V oldValue = null;
-    int index = Math.abs(key.hashCode()) % SIZE;
+    int index = Math.abs(key.hashCode()) % capacity;
     if (buckets[index] == null) {
       buckets[index] = new LinkedList<>();
     }
@@ -40,13 +45,20 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V> 
       }
     }
     if (!found) {
+      if (count >= threshold) {
+        rehash();
+      }
+      if (buckets[index] == null) {
+        buckets[index] = new LinkedList<>();
+      }
       buckets[index].add(pair);
+      ++count;
     }
     return oldValue;
   }
 
   public V get(Object key) {
-    int index = Math.abs(key.hashCode()) % SIZE;
+    int index = Math.abs(key.hashCode()) % capacity;
     if (buckets[index] == null) {
       return null;
     }
@@ -74,7 +86,7 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V> 
   // Almost all copied from AbstractMap and from get method.
   @Override
   public V remove(Object key) {
-    int index = Math.abs(key.hashCode()) % SIZE;
+    int index = Math.abs(key.hashCode()) % capacity;
     if (buckets[index] == null) {
       return null;
     }
@@ -90,15 +102,64 @@ public class SimpleHashMap<K, V> extends AbstractMap<K, V> implements Map<K, V> 
     return null;
   }
 
+  private void rehash() {
+    // Set new parameters for HashMap
+    capacity = nextPrime(capacity * 2);
+    buckets = new LinkedList[capacity];
+    threshold = (int) (capacity * loadFactor);
+    count = 0;
+    // Get set of current map entries
+    Iterator<Entry<K, V>> iterator = entrySet().iterator();
+    while (iterator.hasNext()) {
+      Map.Entry<K, V> entry = iterator.next();
+      put(entry.getKey(), entry.getValue());
+    }
+  }
+
+  private boolean isPrime(int n) {
+    if (n <= 1) {
+      return false;
+    }
+    if (n <= 3) {
+      return true;
+    }
+    if (n % 2 == 0 || n % 3 == 0) {
+      return false;
+    }
+    for (int i = 5; i * i <= n; i = i + 6) {
+      if (n % i == 0 || n % (i + 2) == 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private int nextPrime(int n) {
+    // Base case
+    if (n <= 1) {
+      return 2;
+    }
+    int prime = n;
+    boolean found = false;
+    while (!found) {
+      prime++;
+
+      if (isPrime(prime)) {
+        found = true;
+      }
+    }
+    return prime;
+  }
+
   @Override
   @SuppressWarnings("unchecked")
   public void clear() {
-    buckets = new LinkedList[SIZE];
+    buckets = new LinkedList[capacity];
   }
 
   public static void main(String[] args) {
     SimpleHashMap<String, String> m = new SimpleHashMap<>();
-    m.putAll(Countries.capitals(25));
+    m.putAll(Countries.capitals(40));
     System.out.println(m);
     System.out.println(m.get("ERITREA"));
     System.out.println(m.entrySet());
