@@ -1,7 +1,11 @@
 package com.test.util;
 
+import com.test.containers.ComparableTwoStrings;
+
 public class CountingGenerator {
+
   public static class Boolean implements Generator<java.lang.Boolean> {
+
     private boolean value = false;
 
     public java.lang.Boolean next() {
@@ -11,6 +15,7 @@ public class CountingGenerator {
   }
 
   public static class Byte implements Generator<java.lang.Byte> {
+
     private byte value = 0;
 
     public java.lang.Byte next() {
@@ -21,6 +26,7 @@ public class CountingGenerator {
   static char[] chars = ("abcdefghijklmnopqrstuvwxyz" + "ABCDEFGHIJKLMNOPQRSTUVWXYZ").toCharArray();
 
   public static class Character implements Generator<java.lang.Character> {
+
     int index = -1;
 
     public java.lang.Character next() {
@@ -30,10 +36,12 @@ public class CountingGenerator {
   }
 
   public static class String implements Generator<java.lang.String> {
+
     private int length = 7;
     Generator<java.lang.Character> cg = new Character();
 
-    public String() {}
+    public String() {
+    }
 
     public String(int length) {
       this.length = length;
@@ -41,12 +49,15 @@ public class CountingGenerator {
 
     public java.lang.String next() {
       char[] buf = new char[length];
-      for (int i = 0; i < length; i++) buf[i] = cg.next();
+      for (int i = 0; i < length; i++) {
+        buf[i] = cg.next();
+      }
       return new java.lang.String(buf);
     }
   }
 
   public static class Short implements Generator<java.lang.Short> {
+
     private short value = 0;
 
     public java.lang.Short next() {
@@ -55,6 +66,7 @@ public class CountingGenerator {
   }
 
   public static class Integer implements Generator<java.lang.Integer> {
+
     private int value = 0;
 
     public java.lang.Integer next() {
@@ -63,6 +75,7 @@ public class CountingGenerator {
   }
 
   public static class Long implements Generator<java.lang.Long> {
+
     private long value = 0;
 
     public java.lang.Long next() {
@@ -71,6 +84,7 @@ public class CountingGenerator {
   }
 
   public static class Float implements Generator<java.lang.Float> {
+
     private float value = 0;
 
     public java.lang.Float next() {
@@ -81,12 +95,24 @@ public class CountingGenerator {
   }
 
   public static class Double implements Generator<java.lang.Double> {
+
     private double value = 0.0;
 
     public java.lang.Double next() {
       double result = value;
       value += 1.0;
       return result;
+    }
+  }
+
+  public static class ComparableTwoStrings implements
+      Generator<com.test.containers.ComparableTwoStrings> {
+
+    Generator<java.lang.String> gen = new CountingGenerator.String();
+
+    @Override
+    public com.test.containers.ComparableTwoStrings next() {
+      return new com.test.containers.ComparableTwoStrings(gen.next(), gen.next());
     }
   }
 }

@@ -36,6 +36,12 @@ public class RandomGenerator {
     }
   }
 
+  public static class ComparableTwoStrings extends CountingGenerator.ComparableTwoStrings {
+    {
+      gen = new String();
+    }
+  }
+
   public static class Short implements Generator<java.lang.Short> {
     public java.lang.Short next() {
       return (short) r.nextInt();
