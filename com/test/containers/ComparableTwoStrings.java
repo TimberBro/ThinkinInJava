@@ -1,5 +1,7 @@
 package com.test.containers;
 
+import java.util.Objects;
+
 public class ComparableTwoStrings implements Comparable<ComparableTwoStrings> {
 
   private String firstString;
@@ -35,5 +37,26 @@ public class ComparableTwoStrings implements Comparable<ComparableTwoStrings> {
   public String toString() {
     return "ComparableTwoStrings{" + "firstString='" + firstString + '\'' + ", secondString='"
         + secondString + '\'' + '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    ComparableTwoStrings that = (ComparableTwoStrings) o;
+    return getFirstString().equals(that.getFirstString()) && getSecondString()
+        .equals(that.getSecondString());
+  }
+
+  @Override
+  public int hashCode() {
+    int result = 17;
+    result = result * 37 + firstString.hashCode();
+    result = result * 37 + secondString.hashCode();
+    return result;
   }
 }
