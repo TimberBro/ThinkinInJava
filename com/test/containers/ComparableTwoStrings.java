@@ -30,7 +30,7 @@ public class ComparableTwoStrings implements Comparable<ComparableTwoStrings> {
 
   @Override
   public int compareTo(ComparableTwoStrings str) {
-    return firstString.compareTo(str.getFirstString());
+    return firstString.toLowerCase().compareTo(str.getFirstString().toLowerCase());
   }
 
   @Override
@@ -48,8 +48,8 @@ public class ComparableTwoStrings implements Comparable<ComparableTwoStrings> {
       return false;
     }
     ComparableTwoStrings that = (ComparableTwoStrings) o;
-    return getFirstString().equals(that.getFirstString()) && getSecondString()
-        .equals(that.getSecondString());
+    return getFirstString().equals(that.getFirstString().toLowerCase()) && getSecondString()
+        .equals(that.getSecondString().toLowerCase());
   }
 
   @Override
