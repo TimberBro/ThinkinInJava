@@ -73,7 +73,6 @@ public final class Directory {
           totalSize += item.length();
         }
     }
-    System.out.println("Total size of matches files = " + totalSize + " bytes.");
     return result;
   }
 
