@@ -9,8 +9,9 @@ import java.util.LinkedList;
 public class TextFileToLinkedList {
 
   public static void main(String[] args) {
-    if (args.length != 1) {
-      System.out.println("Usage java TextFileToLinkedList %full path to file%");
+    if (args.length != 2) {
+      System.out
+          .println("Usage java TextFileToLinkedList %full path to file% \"words to find in file\"");
     } else {
       LinkedList<String> list = new LinkedList<>();
       try {
@@ -29,8 +30,15 @@ public class TextFileToLinkedList {
         e.printStackTrace();
       }
 
+      int linesCounter = 0;
       for (int i = list.size() - 1; i >= 0; i--) {
-        System.out.println(list.get(i).toUpperCase());
+        if (list.get(i).contains(args[1])) {
+          linesCounter++;
+          System.out.println(list.get(i));
+        }
+      }
+      if (linesCounter == 0) {
+        System.out.println("Nothing was found.");
       }
     }
   }
