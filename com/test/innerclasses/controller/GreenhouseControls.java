@@ -1,9 +1,61 @@
-package com.test.innerclasses.contoller;
+package com.test.innerclasses.controller;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class GreenhouseControls extends Controller {
+
+  @SuppressWarnings("unchecked")
+  public void initialize(String configPath) {
+    Map<String, Long> settingsMap = readConfig(configPath);
+    Iterator<Entry<String, Long>> iterator = settingsMap.entrySet().iterator();
+    while (iterator.hasNext()) {
+      Entry<String, Long> currentSetting = iterator.next();
+      String className = currentSetting.getKey();
+      Class<Event> cls = null;
+      Class<?> outer = GreenhouseControls.class;
+      String type = outer.getName() + "$" + className;
+      try {
+        cls = (Class<Event>) Class
+            .forName(type);
+        Constructor<Event> ctor = cls.getConstructor(outer, long.class);
+        addEvent(ctor.newInstance(GreenhouseControls.this, currentSetting.getValue()));
+      } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private Map<String, Long> readConfig(String configPath) {
+    Map<String, Long> settingsMap = new HashMap<>();
+    try {
+      BufferedReader reader = new BufferedReader(new FileReader(configPath));
+      String currentString;
+      while ((currentString = reader.readLine()) != null) {
+        settingsMap
+            .put(currentString.split(":")[0], Long.valueOf(currentString.split(":")[1].trim()));
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return settingsMap;
+  }
+
   private boolean light = false;
 
   public class LightOn extends Event {
+
     public LightOn(long delayTime) {
       super(delayTime);
     }
@@ -20,6 +72,7 @@ public class GreenhouseControls extends Controller {
   }
 
   public class LightOff extends Event {
+
     public LightOff(long delayTime) {
       super(delayTime);
     }
@@ -38,6 +91,7 @@ public class GreenhouseControls extends Controller {
   private boolean water = false;
 
   public class WaterOn extends Event {
+
     public WaterOn(long delayTime) {
       super(delayTime);
     }
@@ -53,6 +107,7 @@ public class GreenhouseControls extends Controller {
   }
 
   public class WaterOff extends Event {
+
     public WaterOff(long delayTime) {
       super(delayTime);
     }
@@ -70,6 +125,7 @@ public class GreenhouseControls extends Controller {
   private String thermostat = "Day";
 
   public class ThermostatNight extends Event {
+
     public ThermostatNight(long delayTime) {
       super(delayTime);
     }
@@ -85,6 +141,7 @@ public class GreenhouseControls extends Controller {
   }
 
   public class ThermostatDay extends Event {
+
     public ThermostatDay(long delayTime) {
       super(delayTime);
     }
@@ -138,6 +195,7 @@ public class GreenhouseControls extends Controller {
   // An example of an action() that inserts a
   // new one of itself into the event list:
   public class Bell extends Event {
+
     public Bell(long delayTime) {
       super(delayTime);
     }
@@ -152,6 +210,7 @@ public class GreenhouseControls extends Controller {
   }
 
   public class Restart extends Event {
+
     private Event[] eventList;
 
     public Restart(long delayTime, Event[] eventList) {
@@ -177,6 +236,7 @@ public class GreenhouseControls extends Controller {
   }
 
   public static class Terminate extends Event {
+
     public Terminate(long delayTime) {
       super(delayTime);
     }
@@ -191,11 +251,12 @@ public class GreenhouseControls extends Controller {
   }
 }
 
-
 class GreenhouseControlsMistGenerator extends GreenhouseControls {
+
   private boolean mist = false;
 
   public class MistGeneratorOn extends Event {
+
     MistGeneratorOn(long delayTime) {
       super(delayTime);
     }
@@ -212,6 +273,7 @@ class GreenhouseControlsMistGenerator extends GreenhouseControls {
   }
 
   public class MistGeneratorOff extends Event {
+
     MistGeneratorOff(long delayTime) {
       super(delayTime);
     }
