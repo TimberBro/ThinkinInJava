@@ -8,6 +8,20 @@ import java.util.LinkedList;
 
 public class TextFileToLinkedList {
 
+  static LinkedList<String> convert(String path) throws IOException {
+    LinkedList<String> list = new LinkedList<>();
+    BufferedReader in = new BufferedReader(new FileReader(path));
+    while (true) {
+      String currentLine = in.readLine();
+      if (currentLine != null) {
+        list.add(currentLine);
+      } else {
+        break;
+      }
+    }
+    return list;
+  }
+
   public static void main(String[] args) {
     if (args.length != 2) {
       System.out
@@ -15,15 +29,7 @@ public class TextFileToLinkedList {
     } else {
       LinkedList<String> list = new LinkedList<>();
       try {
-        BufferedReader in = new BufferedReader(new FileReader(args[0]));
-        while (true) {
-          String currentLine = in.readLine();
-          if (currentLine != null) {
-            list.add(currentLine);
-          } else {
-            break;
-          }
-        }
+        list = convert(args[0]);
       } catch (FileNotFoundException e) {
         e.printStackTrace();
       } catch (IOException e) {
