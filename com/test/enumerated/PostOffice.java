@@ -1,6 +1,7 @@
 package com.test.enumerated;
 
 import com.test.util.Enums;
+import java.util.EnumMap;
 import java.util.Iterator;
 
 class Mail {
@@ -84,11 +85,15 @@ class Mail {
   }
 }
 
-public class PostOffice {
 
-  enum MailHandler {
-    GENERAL_DELIVERY {
-      boolean handle(Mail m) {
+public class PostOffice {
+  static EnumMap<MailHandler, Command> handlerMap =
+      new EnumMap<>(MailHandler.class);
+
+  static {
+    handlerMap.put(MailHandler.GENERAL_DELIVERY, new Command() {
+      @Override
+      public boolean handle(Mail m) {
         switch (m.generalDelivery) {
           case YES:
             System.out.println("Using general delivery for " + m);
@@ -97,8 +102,10 @@ public class PostOffice {
             return false;
         }
       }
-    }, MACHINE_SCAN {
-      boolean handle(Mail m) {
+    });
+    handlerMap.put(MailHandler.MACHINE_SCAN, new Command() {
+      @Override
+      public boolean handle(Mail m) {
         switch (m.scannability) {
           case UNSCANNABLE:
             return false;
@@ -112,8 +119,10 @@ public class PostOffice {
             }
         }
       }
-    }, VISUAL_INSPECTION {
-      boolean handle(Mail m) {
+    });
+    handlerMap.put(MailHandler.VISUAL_INSPECTION, new Command() {
+      @Override
+      public boolean handle(Mail m) {
         switch (m.readability) {
           case ILLEGIBLE:
             return false;
@@ -127,9 +136,10 @@ public class PostOffice {
             }
         }
       }
-    }, FORWARD_TO_ADDRESS {
+    });
+    handlerMap.put(MailHandler.FORWARD_TO_ADDRESS, new Command() {
       @Override
-      boolean handle(Mail m) {
+      public boolean handle(Mail m) {
         switch (m.forwardAddress) {
           case MISSING:
             return false;
@@ -138,8 +148,10 @@ public class PostOffice {
             return true;
         }
       }
-    }, RETURN_TO_SENDER {
-      boolean handle(Mail m) {
+    });
+    handlerMap.put(MailHandler.RETURN_TO_SENDER, new Command() {
+      @Override
+      public boolean handle(Mail m) {
         switch (m.returnAddress) {
           case MISSING:
             return false;
@@ -148,14 +160,16 @@ public class PostOffice {
             return true;
         }
       }
-    };
+    });
+  }
 
-    abstract boolean handle(Mail m);
+  enum MailHandler {
+     GENERAL_DELIVERY, MACHINE_SCAN, VISUAL_INSPECTION, FORWARD_TO_ADDRESS, RETURN_TO_SENDER
   }
 
   static void handle(Mail m) {
-    for (MailHandler handler : MailHandler.values()) {
-      if (handler.handle(m)) {
+    for (Command command : handlerMap.values()) {
+      if (command.handle(m)) {
         return;
       }
     }
