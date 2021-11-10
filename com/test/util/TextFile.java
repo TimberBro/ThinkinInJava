@@ -15,10 +15,12 @@ public class TextFile extends ArrayList<String> {
   public static String read(String fileName) {
     StringBuilder sb = new StringBuilder();
     try {
+
       BufferedReader in = new BufferedReader(new FileReader(new File(fileName).getAbsoluteFile()));
       try {
         String s;
         while ((s = in.readLine()) != null) {
+
           sb.append(s);
           sb.append("\n");
         }
@@ -26,6 +28,7 @@ public class TextFile extends ArrayList<String> {
         in.close();
       }
     } catch (IOException e) {
+      
       throw new RuntimeException(e);
     }
     return sb.toString();
@@ -35,6 +38,7 @@ public class TextFile extends ArrayList<String> {
   public static void write(String fileName, String text) {
     try {
       PrintWriter out = new PrintWriter(new File(fileName).getAbsoluteFile());
+
       try {
         out.print(text);
       } finally {
@@ -54,6 +58,7 @@ public class TextFile extends ArrayList<String> {
       remove(0);
     }
   }
+
 
   // Normally read by lines:
   public TextFile(String fileName) {
@@ -87,3 +92,4 @@ public class TextFile extends ArrayList<String> {
     System.out.println(words.headSet("a"));
   }
 }
+
