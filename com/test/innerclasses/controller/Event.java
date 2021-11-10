@@ -1,4 +1,4 @@
-package com.test.innerclasses.contoller;
+package com.test.innerclasses.controller;
 
 public abstract class Event {
   private long eventTime;

@@ -1,4 +1,4 @@
-package com.test.innerclasses.contoller;
+package com.test.innerclasses.controller;
 
 import java.util.ArrayList;
 import java.util.List;

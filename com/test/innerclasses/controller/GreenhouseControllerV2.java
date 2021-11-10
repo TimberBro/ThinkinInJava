@@ -1,8 +1,8 @@
-package com.test.innerclasses.contoller;
+package com.test.innerclasses.controller;
 
-public class GreenhouseController {
+public class GreenhouseControllerV2 {
   public static void main(String[] args) {
-    GreenhouseControls gc = new GreenhouseControls();
+    GreenhouseControlsMistGenerator gc = new GreenhouseControlsMistGenerator();
     // Instead of hard - wiring , you could parse
     // configuration information from a text file here:
     gc.addEvent(gc.new Bell(900));
@@ -13,8 +13,8 @@ public class GreenhouseController {
       gc.new WaterOn(600),
       gc.new WaterOff(800),
       gc.new ThermostatDay(1400),
-      gc.new FansOn(1500),
-      gc.new FansOff(1800)
+      gc.new MistGeneratorOn(1500),
+      gc.new MistGeneratorOff(1800)
       };
     gc.addEvent(gc.new Restart(2000, eventList));
     if (args.length == 1) {
