@@ -2,6 +2,8 @@ package com.test.concurrency;
 
 import com.test.generics.Fibonacci;
 import java.util.LinkedList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MultithreadedFibonacci implements Runnable {
 
@@ -24,7 +26,10 @@ public class MultithreadedFibonacci implements Runnable {
   }
 
   public static void main(String[] args) {
-    for(int i = 1; i <= 5; i++)
-      new Thread(new MultithreadedFibonacci(i)).start();
+    ExecutorService executor = Executors.newCachedThreadPool();
+    for (int i = 1; i <= 5; i++) {
+      executor.execute(new MultithreadedFibonacci(i));
+    }
+    executor.shutdown();
   }
 }
