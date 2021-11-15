@@ -1,5 +1,8 @@
 package com.test.concurrency;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Alarm implements Runnable {
   private static int taskCount = 0;
   private final int id = taskCount++;
@@ -20,8 +23,10 @@ public class Alarm implements Runnable {
   }
 
   public static void main(String[] args) {
+    ExecutorService executor = Executors.newSingleThreadExecutor();
     for (int i = 0; i < 5; i++) {
-      new Thread(new Alarm()).start();
+      executor.execute(new Alarm());
     }
+    executor.shutdown();
   }
 }
