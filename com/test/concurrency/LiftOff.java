@@ -4,7 +4,8 @@ import java.util.concurrent.TimeUnit;
 
 public class LiftOff implements Runnable {
 
-  protected int countDown = 10; // Default
+  // Highly increased to fail all threads
+  protected int countDown = 1000000;
   private static int taskCount = 0;
   private final int id = taskCount++;
 
@@ -26,9 +27,12 @@ public class LiftOff implements Runnable {
 
   public void run() {
     while (countDown-- > 0) {
+      if (Thread.currentThread().isInterrupted()) {
+        System.out.println("Interrupted: #" + id);
+        return;
+      }
       System.out.print(status());
       Thread.yield();
     }
   }
 }
-
