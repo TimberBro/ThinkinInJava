@@ -7,6 +7,28 @@ import java.util.concurrent.TimeUnit;
 class LightSwitch {
 
   boolean lighted = false;
+
+  public synchronized void setLightedOn() {
+    lighted = true; // Ready to buff
+    notifyAll();
+  }
+
+  public synchronized void setLightedOff() {
+    lighted = false; // Ready for another coat of wax
+    notifyAll();
+  }
+
+  public synchronized void waitForTurningOn() throws InterruptedException {
+    while (!lighted) {
+      wait();
+    }
+  }
+
+  public synchronized void waitForTurningOff() throws InterruptedException {
+    while (lighted) {
+      wait();
+    }
+  }
 }
 
 class TurnOn implements Runnable {
@@ -20,12 +42,16 @@ class TurnOn implements Runnable {
   @Override
   public void run() {
     try {
-      TimeUnit.SECONDS.sleep(1);
-      lightSwitch.lighted = true;
-      System.out.println("Light turned on.");
+      while (!Thread.interrupted()) {
+        System.out.println("Lights On!");
+        TimeUnit.MILLISECONDS.sleep(200);
+        lightSwitch.setLightedOn();
+        lightSwitch.waitForTurningOff();
+      }
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      System.out.println("Exiting via interrupt");
     }
+    System.out.println("Ending TurnOn task");
   }
 }
 
@@ -39,31 +65,29 @@ class TurnOff implements Runnable {
 
   @Override
   public void run() {
-    while (!lightSwitch.lighted) {
-      try {
-        TimeUnit.SECONDS.sleep(3);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
+    try {
+      while (!Thread.interrupted()) {
+        lightSwitch.waitForTurningOn();
+        System.out.println("Lights Off!");
+        TimeUnit.MILLISECONDS.sleep(200);
+        lightSwitch.setLightedOff();
       }
+    } catch (InterruptedException e) {
+      System.out.println("Exiting via interrupt");
     }
-    lightSwitch.lighted = false;
-    System.out.println("Light turned off.");
+    System.out.println("Ending TurnOn task");
   }
 }
 
-// Busy wait approach. Slow because we should wait for timeouts.
+// Fixed version, that uses wait(), instead of busy waits.
 public class BusyWait {
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws Exception {
     LightSwitch lightSwitch = new LightSwitch();
     ExecutorService exec = Executors.newCachedThreadPool();
     exec.execute(new TurnOff(lightSwitch));
     exec.execute(new TurnOn(lightSwitch));
-    try {
-      TimeUnit.SECONDS.sleep(5);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    exec.shutdown();
+    TimeUnit.SECONDS.sleep(5);
+    exec.shutdownNow();
   }
 }
