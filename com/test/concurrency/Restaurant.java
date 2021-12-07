@@ -65,6 +65,8 @@ class Producer implements Runnable {
         if (++count == 10) {
           System.out.println("Out of items, closing");
           restaurant.exec.shutdownNow();
+          return; // "Order up!" and "Producer interrupted" will not be printed,
+          // because method exist immediately.
         }
         System.out.print("Order up! ");
         synchronized (restaurant.consumer) {
