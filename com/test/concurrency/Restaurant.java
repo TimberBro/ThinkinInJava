@@ -20,6 +20,7 @@ class Item {
 class Consumer implements Runnable {
 
   private Restaurant restaurant;
+  boolean notified;
 
   public Consumer(Restaurant r) {
     restaurant = r;
@@ -34,13 +35,54 @@ class Consumer implements Runnable {
           }
         }
         System.out.println("Consumer got " + restaurant.item);
+        synchronized (restaurant.boy) {
+          restaurant.boy.notified = true;
+          restaurant.boy.notifyAll();
+        }
         synchronized (restaurant.producer) {
           restaurant.item = null;
           restaurant.producer.notifyAll(); // Ready for another
         }
+        synchronized (this) {
+          if (!notified) {
+            wait();
+          }
+          notified = false;
+        }
       }
     } catch (InterruptedException e) {
       System.out.println("Consumer interrupted");
+    }
+  }
+}
+
+class BusBoy implements Runnable {
+
+  private Restaurant restaurant;
+  boolean notified;
+
+  public BusBoy(Restaurant r) {
+    restaurant = r;
+  }
+
+  @Override
+  public void run() {
+    try {
+      while (!Thread.interrupted()) {
+        synchronized (this) {
+          while (!notified) {
+            wait();
+          }
+          notified = false;
+        }
+        System.out.println("BusBoy start clean up.");
+        synchronized (restaurant.consumer) {
+          restaurant.consumer.notified = true;
+          restaurant.consumer.notifyAll();
+        }
+      }
+    } catch (InterruptedException e) {
+      System.out.println("BusBoy interrupted");
     }
   }
 }
@@ -87,8 +129,10 @@ public class Restaurant {
   ExecutorService exec = Executors.newCachedThreadPool();
   Consumer consumer = new Consumer(this);
   Producer producer = new Producer(this);
+  BusBoy boy = new BusBoy(this);
 
   public Restaurant() {
+    exec.execute(boy);
     exec.execute(producer);
     exec.execute(consumer);
   }
