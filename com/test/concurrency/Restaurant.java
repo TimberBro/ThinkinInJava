@@ -3,12 +3,15 @@ package com.test.concurrency;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
-class Item {
+class Meal {
 
   private final int orderNum;
 
-  public Item(int orderNum) {
+  public Meal(int orderNum) {
     this.orderNum = orderNum;
   }
 
@@ -17,124 +20,94 @@ class Item {
   }
 }
 
-class Consumer implements Runnable {
+class WaitPerson implements Runnable {
 
+  Lock lock = new ReentrantLock();
+  Condition condition = lock.newCondition();
   private Restaurant restaurant;
-  boolean notified;
 
-  public Consumer(Restaurant r) {
+  public WaitPerson(Restaurant r) {
     restaurant = r;
   }
 
   public void run() {
     try {
       while (!Thread.interrupted()) {
-        synchronized (this) {
-          while (restaurant.item == null) {
-            wait(); // ... for the Producer to produce a meal
+        lock.lock();
+        try {
+          while (restaurant.meal == null) {
+            condition.await(); // ... for the chef to produce a meal
           }
+        } finally {
+          lock.unlock();
         }
-        System.out.println("Consumer got " + restaurant.item);
-        synchronized (restaurant.boy) {
-          restaurant.boy.notified = true;
-          restaurant.boy.notifyAll();
-        }
-        synchronized (restaurant.producer) {
-          restaurant.item = null;
-          restaurant.producer.notifyAll(); // Ready for another
-        }
-        synchronized (this) {
-          if (!notified) {
-            wait();
-          }
-          notified = false;
+        System.out.println("Waitperson got " + restaurant.meal);
+        restaurant.chef.lock.lock();
+        try {
+          restaurant.meal = null;
+          restaurant.chef.condition.signalAll(); // Ready for another
+        } finally {
+          restaurant.chef.lock.unlock();
         }
       }
     } catch (InterruptedException e) {
-      System.out.println("Consumer interrupted");
+      System.out.println("WaitPerson interrupted");
     }
   }
 }
 
-class BusBoy implements Runnable {
+class Chef implements Runnable {
 
-  private Restaurant restaurant;
-  boolean notified;
-
-  public BusBoy(Restaurant r) {
-    restaurant = r;
-  }
-
-  @Override
-  public void run() {
-    try {
-      while (!Thread.interrupted()) {
-        synchronized (this) {
-          while (!notified) {
-            wait();
-          }
-          notified = false;
-        }
-        System.out.println("BusBoy start clean up.");
-        synchronized (restaurant.consumer) {
-          restaurant.consumer.notified = true;
-          restaurant.consumer.notifyAll();
-        }
-      }
-    } catch (InterruptedException e) {
-      System.out.println("BusBoy interrupted");
-    }
-  }
-}
-
-class Producer implements Runnable {
-
+  Lock lock = new ReentrantLock();
+  Condition condition = lock.newCondition();
   private Restaurant restaurant;
   private int count = 0;
 
-  public Producer(Restaurant r) {
+  public Chef(Restaurant r) {
     restaurant = r;
   }
 
   public void run() {
     try {
       while (!Thread.interrupted()) {
-        synchronized (this) {
-          while (restaurant.item != null) {
-            wait(); // ... for the meal to be taken
+        lock.lock();
+        try {
+          while (restaurant.meal != null) {
+            condition.await(); // ... for the meal to be taken
           }
+        } finally {
+          lock.unlock();
         }
         if (++count == 10) {
-          System.out.println("Out of items, closing");
+          System.out.println("Out of food, closing");
           restaurant.exec.shutdownNow();
-          return; // "Order up!" and "Producer interrupted" will not be printed,
-          // because method exist immediately.
         }
         System.out.print("Order up! ");
-        synchronized (restaurant.consumer) {
-          restaurant.item = new Item(count);
-          restaurant.consumer.notifyAll();
+        restaurant.waitPerson.lock.lock();
+        try {
+          restaurant.meal = new Meal(count);
+          restaurant.waitPerson.condition.signalAll();
+        } finally {
+          restaurant.waitPerson.lock.unlock();
         }
         TimeUnit.MILLISECONDS.sleep(100);
       }
     } catch (InterruptedException e) {
-      System.out.println("Producer interrupted");
+      System.out.println("Chef interrupted");
     }
   }
 }
 
 public class Restaurant {
 
-  Item item;
+  Meal meal;
   ExecutorService exec = Executors.newCachedThreadPool();
-  Consumer consumer = new Consumer(this);
-  Producer producer = new Producer(this);
-  BusBoy boy = new BusBoy(this);
+  WaitPerson waitPerson = new WaitPerson(this);
+  Chef chef = new Chef(this);
 
   public Restaurant() {
-    exec.execute(boy);
-    exec.execute(producer);
-    exec.execute(consumer);
+    exec.execute(chef);
+    exec.execute(waitPerson);
   }
 
   public static void main(String[] args) {
