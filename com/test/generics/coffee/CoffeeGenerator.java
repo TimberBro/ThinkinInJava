@@ -1,3 +1,4 @@
+
 // : generics/coffee/CoffeeGenerator.java
 // Generate different types of Coffee:
 package com.test.generics.coffee;
@@ -9,6 +10,7 @@ public class CoffeeGenerator implements Generator<Coffee>, Iterable<Coffee> {
   private Class[] types = {
     Latte.class, Mocha.class, Cappuccino.class, Americano.class, Breve.class,
   };
+
   private static Random rand = new Random(47);
 
   public CoffeeGenerator() {}

@@ -2,6 +2,7 @@
 package com.test.typeinfo.pets;
 
 public class Mouse extends Rodent {
+
   public Mouse(String name) {
     super(name);
   }
@@ -12,5 +13,6 @@ public class Mouse extends Rodent {
 
   public void speak() {
     System.out.println("Mouse.speak()");
+
   }
 } /// :~

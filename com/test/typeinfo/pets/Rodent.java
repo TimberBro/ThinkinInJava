@@ -2,6 +2,7 @@
 package com.test.typeinfo.pets;
 
 public class Rodent extends Pet {
+
   public Rodent(String name) {
     super(name);
   }
@@ -13,5 +14,6 @@ public class Rodent extends Pet {
   @Override
   public void speak() {
     System.out.println("Rodent.speak()");
+
   }
 } /// :~

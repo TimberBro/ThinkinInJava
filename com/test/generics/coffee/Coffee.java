@@ -1,5 +1,7 @@
+
 // : generics/coffee/Coffee.java
 package com.test.generics.coffee;
+
 
 public class Coffee {
   private static long counter = 0;
@@ -8,4 +10,6 @@ public class Coffee {
   public String toString() {
     return getClass().getSimpleName() + " " + id;
   }
+
 } /// :~
+

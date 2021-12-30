@@ -1,3 +1,4 @@
+
 // : typeinfo/pets/Cat.java
 package com.test.typeinfo.pets;
 
@@ -13,5 +14,6 @@ public class Cat extends Pet {
   @Override
   public void speak() {
     System.out.println("Cat.speak()");
+
   }
 } /// :~
