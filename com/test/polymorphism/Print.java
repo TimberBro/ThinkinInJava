@@ -2,6 +2,7 @@ package com.test.polymorphism;
 
 public class Print {
   void print1() {
+    System.out.println("Inside Print called print2()");
     print2();
   }
 
@@ -10,7 +11,7 @@ public class Print {
   }
 
   public static void main(String[] args) {
-    ChildPrint n = new ChildPrint();
+    Print n = new ChildPrint();
     n.print1();
   }
 }
