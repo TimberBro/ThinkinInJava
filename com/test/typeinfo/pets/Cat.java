@@ -1,10 +1,19 @@
+
+// : typeinfo/pets/Cat.java
 package com.test.typeinfo.pets;
 
 public class Cat extends Pet {
+  public Cat(String name) {
+    super(name);
+  }
 
-  public static class Factory implements com.test.typeinfo.factory.Factory<Cat> {
-    public Cat create() {
-      return new Cat();
-    }
+  public Cat() {
+    super();
+  }
+
+  @Override
+  public void speak() {
+    System.out.println("Cat.speak()");
+
   }
 } /// :~

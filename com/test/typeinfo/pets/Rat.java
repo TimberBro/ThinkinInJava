@@ -3,9 +3,18 @@ package com.test.typeinfo.pets;
 
 public class Rat extends Rodent {
 
-  public static class Factory implements com.test.typeinfo.factory.Factory<Rat> {
-    public Rat create() {
-      return new Rat();
-    }
+  public Rat(String name) {
+    super(name);
   }
+
+  public Rat() {
+    super();
+  }
+
+  @Override
+  public void speak() {
+    System.out.println("Rat.speak()");
+  }
+
+
 } /// :~

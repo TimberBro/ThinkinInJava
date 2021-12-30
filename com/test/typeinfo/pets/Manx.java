@@ -3,9 +3,16 @@ package com.test.typeinfo.pets;
 
 public class Manx extends Cat {
 
-  public static class Factory implements com.test.typeinfo.factory.Factory<Manx> {
-    public Manx create() {
-      return new Manx();
-    }
+  public Manx(String name) {
+    super(name);
+  }
+
+  public Manx() {
+    super();
+  }
+
+  public void speak() {
+    System.out.println("Manx.speak()");
+
   }
 } /// :~

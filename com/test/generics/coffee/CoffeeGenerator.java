@@ -1,18 +1,20 @@
+
+// : generics/coffee/CoffeeGenerator.java
+// Generate different types of Coffee:
 package com.test.generics.coffee;
 
 import java.util.*;
-import com.test.util.*;
+import com.test.util.Generator;
 
 public class CoffeeGenerator implements Generator<Coffee>, Iterable<Coffee> {
   private Class[] types = {
-    Latte.class, Mocha.class, Cappuccino.class, Americano.class, Breve.class
+    Latte.class, Mocha.class, Cappuccino.class, Americano.class, Breve.class,
   };
 
   private static Random rand = new Random(47);
 
   public CoffeeGenerator() {}
   // For iteration:
-
   private int size = 0;
 
   public CoffeeGenerator(int sz) {
@@ -51,11 +53,19 @@ public class CoffeeGenerator implements Generator<Coffee>, Iterable<Coffee> {
 
   public static void main(String[] args) {
     CoffeeGenerator gen = new CoffeeGenerator();
-    for (int i = 0; i < 5; i++) {
-      System.out.println(gen.next());
-    }
-    for (Coffee c : new CoffeeGenerator(5)) {
-      System.out.println(c);
-    }
+    for (int i = 0; i < 5; i++) System.out.println(gen.next());
+    for (Coffee c : new CoffeeGenerator(5)) System.out.println(c);
   }
-}
+} /* Output:
+  Americano 0
+  Latte 1
+  Americano 2
+  Mocha 3
+  Mocha 4
+  Breve 5
+  Americano 6
+  Latte 7
+  Cappuccino 8
+  Cappuccino 9
+  */
+// :~

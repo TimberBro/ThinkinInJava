@@ -1,8 +1,5 @@
+// : generics/coffee/Americano.java
 package com.test.generics.coffee;
 
-public class Americano extends Coffee {
-  public static class Factory
-      implements com.test.typeinfo.factory.Factory<Americano> {
-    public Americano create() { return new Americano(); }
-  }
-}
+public class Americano extends Coffee {} // /:~
+

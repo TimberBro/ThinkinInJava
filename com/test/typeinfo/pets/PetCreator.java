@@ -1,3 +1,5 @@
+//: typeinfo/pets/PetCreator.java
+// Creates random sequences of Pets.
 package com.test.typeinfo.pets;
 
 import java.util.*;
@@ -12,18 +14,17 @@ public abstract class PetCreator {
     int n = rand.nextInt(types().size());
     try {
       return types().get(n).newInstance();
-    } catch (InstantiationException e) {
+
+    } catch(InstantiationException e) {
       throw new RuntimeException(e);
-    } catch (IllegalAccessException e) {
+    } catch(IllegalAccessException e) {
       throw new RuntimeException(e);
     }
-  }
-
+  }	
   public Pet[] createArray(int size) {
     Pet[] result = new Pet[size];
-    for (int i = 0; i < size; i++) {
+    for(int i = 0; i < size; i++)
       result[i] = randomPet();
-    }
     return result;
   }
 
@@ -32,4 +33,5 @@ public abstract class PetCreator {
     Collections.addAll(result, createArray(size));
     return result;
   }
-} /// :~
+} ///:~
+

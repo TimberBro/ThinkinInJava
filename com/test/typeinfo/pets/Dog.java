@@ -3,9 +3,16 @@ package com.test.typeinfo.pets;
 
 public class Dog extends Pet {
 
-  public static class Factory implements com.test.typeinfo.factory.Factory<Dog> {
-    public Dog create() {
-      return new Dog();
-    }
+  public Dog(String name) {
+    super(name);
+  }
+
+  public Dog() {
+    super();
+  }
+
+  public void speak() {
+    System.out.println("Dog.speak()");
+
   }
 } /// :~
